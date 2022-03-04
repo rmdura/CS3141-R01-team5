@@ -1,0 +1,21 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+actor student
+rectangle "Student Socializing Website"{
+  student -- (Create Account)
+  student -- (Login to Account)
+  student -- (Logout of Account)
+  student -- (Add Interest Tags)
+  student -- (Search Events)
+  student -- (Create Event)
+  student -- (Join Event)
+  student -- (Leave Event)
+  student -- (View Available Events)
+  student -- (Edit Profile)
+  (Login to Account) .> (Create Account) : <<extend>>
+  (Login to Account) .> (Logout of Account) : <<include>>
+  (Leave Event) .> (Join Event) : <<extend>>
+  (Add Tags) .> (Create Event) : <<extend>>
+}
+@enduml
