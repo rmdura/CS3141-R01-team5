@@ -17,7 +17,7 @@
                     <li><a href="">HOME</a></li>
                     <li><a href="">ABOUT</a></li>
                     <li><a href="">CONTACT</a></li>
-                    <li><a href="">LOGIN</a></li>
+                    <button onclick="document.getElementById('id01').style.display='block'" class="login-btn">LOGIN</button>
                 </ul>
             </div>
         </nav>
@@ -92,6 +92,55 @@
                 <img src="images/Review3.png">
             </div>
         </div>
+    </section>
+    <!-- Login Button Section -->
+    <section>
+        <div id="id01" class="modal">
+            <div class="login-div">
+                <div class="title">College Socializing Platform</div>
+
+                <div class="form">
+                    <div class="username">
+                        <input type="text" placeholder="Username">
+                    </div>
+
+                    <div class="password">
+                        <input type="password" placeholder="Password">
+                    </div>
+
+                    <div class="options">
+                        <div class="remember-me">
+                            <input id="remember-me" type="checkbox">
+                            <label for="remember-me">Remember me?</label>
+                        </div>
+
+                        <div class="forgot-password">
+                            <a href="#">Forget Password?</a>
+                        </div>
+                    </div>
+
+                    <button class="signin-btn">LOGIN</button>
+                    
+                    <div class="sign-up">
+                        <a href="#">New to College Socializing Platform?</a>
+                    </div>
+
+                    <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancel-btn">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Get the modal
+            var offClick = document.getElementById('id01');
+            
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == offClick) {
+                    offClick.style.display = "none";
+                }
+            }
+        </script>
     </section>
 </body>
 </html>
