@@ -1,28 +1,39 @@
 @startuml
 actor Student
 participant "UI"
-participant "Student Class" as SC
-participant "Event Class" as EC
+participant "Account" as SC
+participant "Event" as EC
 
 Student->UI: createAccount()
 UI->SC: Populate Attributes
 Student->UI: login()
 UI->SC: validateStudent()
-SC->UI: valid Student
+SC-->UI: valid Student
 Student->UI: createEvent()
 UI->EC: Populate Event Attributes
 Student->UI: joinEvent()
 UI->EC: validateEvent()
-EC->UI: valid Event
-UI->SC: addEventDetails()
+activate EC
+EC-->UI: valid Event
+UI->EC: addEventToSchedule()
+EC->SC: add Event to Schedule
+EC-->UI: invalid Event
+deactivate EC
 Student->UI: leaveEvent()
-UI->SC: validateEvent()
-SC->UI: valid Event
+UI->SC: validateEventInSchedule()
+activate SC
+SC-->UI: valid Event in Schedule
+UI->SC: deleteEvent()
+SC-->UI: Event deleted
+SC-->UI: invalid Event in Schedule
+deactivate SC
 Student->UI: searchEvent()
 UI->EC: validateEvent()
-EC->UI: valid Event
-EC->UI: invalid Event
+activate EC
+EC-->UI: valid Event
+EC-->UI: invalid Event
+deactivate EC
 Student->UI: logout()
-SC->UI: invalid Student
+SC-->UI: invalid Student
 
 @enduml
