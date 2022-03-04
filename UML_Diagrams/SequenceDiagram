@@ -1,0 +1,28 @@
+@startuml
+actor Student
+participant "UI"
+participant "Student Class" as SC
+participant "Event Class" as EC
+
+Student->UI: createAccount()
+UI->SC: Populate Attributes
+Student->UI: login()
+UI->SC: validateStudent()
+SC->UI: valid Student
+Student->UI: createEvent()
+UI->EC: Populate Event Attributes
+Student->UI: joinEvent()
+UI->EC: validateEvent()
+EC->UI: valid Event
+UI->SC: addEventDetails()
+Student->UI: leaveEvent()
+UI->SC: validateEvent()
+SC->UI: valid Event
+Student->UI: searchEvent()
+UI->EC: validateEvent()
+EC->UI: valid Event
+EC->UI: invalid Event
+Student->UI: logout()
+SC->UI: invalid Student
+
+@enduml

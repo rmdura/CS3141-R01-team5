@@ -1,0 +1,44 @@
+@startuml
+
+class Account {
+  + Email
+  + Username
+  + Password
+  + Birthdate
+  + Interests
+}
+
+class Event {
+  + Title
+  + Date
+  + Time
+  + Location
+  + Description
+  + Tags
+}
+
+class Location {
+  + Address Number
+  + Street
+  + City
+  + State
+  + ZIP
+}
+
+class Date {
+  + Day
+  + Month
+  + Year
+}
+
+class Time {
+  + Minute
+  + Hour
+}
+
+Event o-- Location
+Event o-- Date
+Event o-- Time
+Account o-- Date
+
+@enduml
