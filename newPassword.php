@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700&display=swap" rel="stylesheet">
 </head>
 
-<header>Change Password Page</header>
+<header>Forgor Password Page</header>
 
 <body>
 
@@ -44,7 +44,12 @@ if (isset($_POST["oldUsername"]) && isset($_POST['newPassword']) && isset($_POST
 			$step->bindParam(':oldUsername', $username); //bind the parameters of query to form answers
 			$step->bindParam(':newPassword', $password);
 			if($step->execute()){
-				header("Location: PasswordChangeSuccess.php"); //if query could be executed redirect user to successful password change webpage
+				//if successful, shows popup and redirects to index.php
+				?>
+				<script> alert ("New password has been set successfully!")
+				window.location.href='index.php';
+				</script>
+				<?php				
 			}
 			else{
 				//print error messages if query could not be performed

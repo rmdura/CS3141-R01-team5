@@ -15,7 +15,7 @@
             <div class="nav-links">
                 <ul>
                     <li><a href="">HOME</a></li>
-                    <li><a href="">ABOUT</a></li>
+                    <li><a href="about.html">ABOUT</a></li>
                     <li><a href="">CONTACT</a></li>
                     <button onclick="document.getElementById('id01').style.display='block'" class="login-btn">LOGIN</button>
                 </ul>
@@ -117,7 +117,13 @@ if (isset($_POST["testUsername"]) && isset($_POST['testPassword']))
   		}
    		else
    		{
-        		header("Location: LoggedIn.php"); //login successful, redirects user to next webpage
+			//Login successful, shows popup then redirects to next page.
+			?>
+			<script> alert ("Successful Login!")
+			window.location.href='LoggedIn.php';
+			</script>
+			<?php
+        		
         	}
 	
 	} catch (PDOException $e) {
