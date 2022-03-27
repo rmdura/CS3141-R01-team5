@@ -63,14 +63,6 @@ if (isset($_POST["newUsername"]) && isset($_POST['newPassword']) && isset($_POST
 	else{
 	$time = strtotime($_POST['newBirthdate']); //convert date in html form to sql date format
 	$birthdate = date('Y-m-d', $time);
-	if ($newBirthdate == ""){ //check if birthdate has been entered
-		?>
-		<script> alert ("Please enter birthdate.")
-		window.location.href='Signup.php';
-		</script>
-		<?php
-	}
-	else{
 	try{
 		$config = parse_ini_file("ProjectDB.ini"); // find database info in .ini file
  		$dbh = new PDO($config['dsn'], $config['username'], $config['password']); // create connection to database
@@ -124,7 +116,7 @@ if (isset($_POST["newUsername"]) && isset($_POST['newPassword']) && isset($_POST
 		print $e->getMessage();
 		die();
 	}
-	}
+	
 	}}}}}
 }
 ?>
