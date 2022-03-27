@@ -11,12 +11,11 @@
 <body>
     <section class="header">
         <nav>
-            <a href="index.html"><img src="images/logo.png"></a>
+            <a href="index.php"><img src="images/logo.png"></a>
             <div class="nav-links">
                 <ul>
                     <li><a href="">HOME</a></li>
                     <li><a href="about.html">ABOUT</a></li>
-                    <li><a href="">CONTACT</a></li>
                     <button onclick="document.getElementById('id01').style.display='block'" class="login-btn">LOGIN</button>
                 </ul>
             </div>
