@@ -330,3 +330,29 @@ nav img{
 .card:nth-child(even) img{
     order: 2;
 }
+
+
+/*----------------- footer -----------------*/
+
+.footer{
+    width: 100%;
+    text-align: center;
+    padding: 30px 0;
+}
+.footer{
+    margin-bottom: 25px;
+    margin-top: 20px;
+    font-weight: 600;   
+}
+.footer h4{
+    color: cadetblue;
+}
+.icons .fa{
+    color: aqua;
+    margin: 0 13px;
+    cursor: pointer;
+    padding: 18px 0;
+}
+.footer p{
+    color: cadetblue;
+}
