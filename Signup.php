@@ -18,9 +18,24 @@
 if (isset($_POST["newUsername"]) && isset($_POST['newPassword']) && isset($_POST['newBirthdate']) && isset($_POST['newEmail'])) 
 {
 	$username = $_POST["newUsername"]; // variable username is the value in the username text box
+	if ($username == ""){ //check if username has been entered
+		?>
+		<script> alert ("Please enter username.")
+		window.location.href='Signup.php';
+		</script>
+		<?php
+	}
+	else{
 	setcookie("username",$username); // set cookie so username can be used later
 	$email = $_POST['newEmail'];
-
+	if ($email == ""){ //check if email has been entered
+		?>
+		<script> alert ("Please enter email.")
+		window.location.href='Signup.php';
+		</script>
+		<?php
+	}
+	else{
 	if (strpos($email, '@') == false)
 	{//email address given is not valid (doesn't contain @)
 		?>
@@ -33,13 +48,29 @@ if (isset($_POST["newUsername"]) && isset($_POST['newPassword']) && isset($_POST
 	if ($domain != 'mtu.edu') //if the domain is not an mtu.edu email, the user will be given a popup warning, which will redirect to signup page when exited out of
 	{
 		?>
-		<script> alert ("Must use an @mtu.edu email.")</script>
+		<script> alert ("Must use a valid MTU address.")</script>
 		<?php
 	}
 	else{ //valid email, can move on
 	$password = $_POST['newPassword'];
+	if ($password == ""){ //check if password has been entered
+		?>
+		<script> alert ("Please enter password.")
+		window.location.href='Signup.php';
+		</script>
+		<?php
+	}
+	else{
 	$time = strtotime($_POST['newBirthdate']); //convert date in html form to sql date format
 	$birthdate = date('Y-m-d', $time);
+	if ($newBirthdate == ""){ //check if birthdate has been entered
+		?>
+		<script> alert ("Please enter birthdate.")
+		window.location.href='Signup.php';
+		</script>
+		<?php
+	}
+	else{
 	try{
 		$config = parse_ini_file("ProjectDB.ini"); // find database info in .ini file
  		$dbh = new PDO($config['dsn'], $config['username'], $config['password']); // create connection to database
@@ -72,7 +103,12 @@ if (isset($_POST["newUsername"]) && isset($_POST['newPassword']) && isset($_POST
 		$step->bindParam(':newBirthdate', $birthdate);
 
 		if($step->execute()){
-			header("Location: AccountCreateSuccess.php"); //if query could be executed redirect user to successful account creation webpage
+			//If query was successful, shows pop up and then redirected to index.php
+			?>
+			<script> alert ("Account created successfully!")
+			window.location.href='index.php';
+			</script>
+			<?php
 		}
 		else{
 			//print error messages if query could not be performed
@@ -89,7 +125,7 @@ if (isset($_POST["newUsername"]) && isset($_POST['newPassword']) && isset($_POST
 		die();
 	}
 	}
-	}
+	}}}}}
 }
 ?>
 
