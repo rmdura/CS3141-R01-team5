@@ -15,57 +15,62 @@
 
 <!-- Start of database connection and editing --> 
 <?php
-if (isset($_POST["newEventTitle"]) && isset($_POST['newEventDateTime']) && isset($_POST['newEventLocation']) && isset($_POST['newEventDescription']) && isset($_POST['newEventTag'])) 
+if (isset($_POST["newEventTitle"]) && isset($_POST['newEventDate']) && isset($_POST['newEventTime']) && isset($_POST['newEventLocation']) && isset($_POST['newEventDescription']) && isset($_POST['newEventTag'])) 
 {
-	$eventTitle = $_POST["newEventTitle"]; // variable username is the value in the username text box
+		$name = $_POST["newEventTitle"]; // variable name is the value in the eventTitle text box
 
-    // *** QUESTIONABLE FORMATTING ***
-    $time = strtotime($_POST['newEventDate']); //convert date in html form to sql date format
-	$eventDateTime = date('Y-m-d', $time);
+		// *** QUESTIONABLE FORMATTING ***
+		$time = strtotime($_POST['newEventDate']); //convert date in html form to sql date format
+		$event_date = date('Y-m-d', $time);
 
-	$eventLocation = $_POST['newEventLocation'];
-    $eventLocation = $_POST['newEventLocation'];
-    $eventDescription = $_POST['newEventDescription'];
-    $eventTag = $_POST['newEventTag'];
-	try{
-		$config = parse_ini_file("ProjectDB.ini"); // find database info in .ini file
- 		$dbh = new PDO($config['dsn'], $config['username'], $config['password']); // create connection to database
-  		$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // error checking
-		
-		$query = "Insert into Event(title, datetime, location, description, tag) values(:newEventTitle, :newEventDateTime, :newEventLocation, :newEventDescription, :newEventTag)"; //query to create new account
-		$step = $dbh->prepare($query); //prepare statement to prevent SQL injection
-		$step->bindParam(':newEventTitle', $eventTitle); //bind the parameters of query to form answers
-		$step->bindParam(':newEventDateTime', $eventDateTime);
-		$step->bindParam(':newEventLocation', $eventLocation);
-		$step->bindParam(':newEventDescription', $eventDescription);
-        $step->bindParam(':newEventTag', $eventTag);
+		$stime = $_POST['newEventTime'];
+		$event_time = date('h:i:s', strtotime($stime));
 
-        // *** MUST MAKE EventCreateSuccess.php ***
-		if($step->execute()){
-			header("Location: EventCreateSuccess.php"); //if query could be executed redirect user to successful event creation webpage
-		}
-		else{
-			//print error messages if query could not be performed
+		$location = $_POST['newEventLocation'];
+		$eventLocation = $_POST['newEventLocation'];
+		$description = $_POST['newEventDescription'];
+		$tag1 = $_POST['newEventTag'];
+		try{
+			$config = parse_ini_file("ProjectDB.ini"); // find database info in .ini file
+			$dbh = new PDO($config['dsn'], $config['username'], $config['password']); // create connection to database
+			$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // error checking
+			
+			$query = "Insert into Event(name, event_date, event_time, location, description, tag1) values(:newEventTitle, :newEventDate, :newEventTime, :newEventLocation, :newEventDescription, :newEventTag)"; //query to create new event
+			$step = $dbh->prepare($query); //prepare statement to prevent SQL injection
+			$step->bindParam(':newEventTitle', $name); //bind the parameters of query to form answers
+			$step->bindParam(':newEventDate', $event_date);
+			$step->bindParam(':newEventTime', $event_time);
+			$step->bindParam(':newEventLocation', $location);
+			$step->bindParam(':newEventDescription', $description);
+			$step->bindParam(':newEventTag', $tag1);
+
+			
+			// *** MUST MAKE EventCreateSuccess.php ***
+			if($step->execute()){
+				header("Location: AccountCreateSuccess.php"); //if query could be executed redirect user to successful event creation webpage
+			}
+			else{
+				//print error messages if query could not be performed
+				print "The event was not able to be created.  Please try again.";
+				print $e->getMessage();	
+			}
+			
+		} catch (PDOException $e) {
+			//print error messages if query could not be performed due to backend/database issues
 			print "The event was not able to be created.  Please try again.";
-			print $e->getMessage();	
-		}	
-		
-	
-	} catch (PDOException $e) {
-		//print error messages if query could not be performed due to backend/database issues
-		print "The event was not able to be created.  Please try again.";
-		print $e->getMessage();
-		die();
+			print $e->getMessage();
+			die();
+		}
 	}
-}
 ?>
 
 <h3>Event Information</h3>
 	<form method = "post" >
 	Title: <input type = "text" name = "newEventTitle" /><br />
-	Datetime: <input type = "datetime-local" name = "newEventDateTime" /><br />
+	Date: <input type = "date" name = "newEventDate" /><br />
+	Time: <input type = "time" name = "newEventTime" /><br />
 	Location: <input type = "text" name = "newEventLocation" /><br />
-	Description: <input type = "text" name = "newEventDescription" /><br />
+	Description: <textarea name = "newEventDescription"></textarea><br />
     Tags: <input type = "text" name = "newEventTag" /><br />
 	<input type = "submit" name = "ok" value = "Create Event">
    	</form>
