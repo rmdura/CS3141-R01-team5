@@ -28,7 +28,7 @@
     <p>
         The platform where college students can get together and have a good time! Use this website to join and communicate events <br>and activities around campus to your fellow peers. This tool is a great and easy way to get out and meet new people!
     </p>
-    <a href="" class="signup-btn">Sign Up Now</a>
+    <button onclick="document.getElementById('id02').style.display='block'" class="signup-btn">Sign Up Now</button>
 </div>
     </section>
     <section class="activities">
@@ -142,6 +142,37 @@
             }
         </script>
     </section>
+    <!-- Signup Button Section -->
+    <section>
+        <div id="id02" class="modal">
+            <div class="login-div">
+                <div class="title">Welcome to College Socializing Platform</div>
+
+                <div class="form">
+                    <div class="newUsername">
+                        <input type="text" placeholder="Username">
+                    </div>
+
+                    <div class="newEmail">
+                        <input type="text" placeholder="Email">
+                    </div>
+
+                    <div class="newBirthdate">
+                        <input placeholder = "Birthdate" class = "textbox-n" type = "text" onfocus = "(this.type = 'date')"  id = "date">
+                    </div>
+
+                    <div class="newPassword">
+                        <input type="password" placeholder="Password">
+                    </div>
+
+                    <button class="signin-btn">Create Account</button>
+
+                    <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancel-btn">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About Footer Section -->
     <section class="footer">
         <h4>
             Connect with Us!

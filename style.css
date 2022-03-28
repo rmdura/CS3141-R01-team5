@@ -168,7 +168,7 @@ nav img{
     display: block;
 }
 
-/*  Login Page */
+/*  Login Page & Signup Page */
 
 .login-btn{
     display: inline-block;
@@ -253,7 +253,7 @@ nav img{
     background: none;
 }
 
-.username, .password {
+.username, .password, .newUsername, .newEmail, .newBirthdate, .newPassword {
     display: block;
     border-radius: 5px;
     border: 1px solid rgba(0, 0, 0, 0.2);
