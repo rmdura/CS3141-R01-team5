@@ -15,7 +15,7 @@
             <div class="nav-links">
                 <ul>
                     <li><a href="">HOME</a></li>
-                    <li><a href="about.html">ABOUT</a></li>
+                    <li><a href="about.php">ABOUT</a></li>
                     <button onclick="document.getElementById('id01').style.display='block'" class="login-btn">LOGIN</button>
                 </ul>
             </div>
