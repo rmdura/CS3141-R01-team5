@@ -119,7 +119,7 @@ if (isset($_POST["testUsername"]) && isset($_POST['testPassword']))
 			//Login successful, shows popup then redirects to next page.
 			?>
 			<script> alert ("Successful Login!")
-			window.location.href='LoggedIn.php';
+			window.location.href='DashBoard.php';
 			</script>
 			<?php
         		
