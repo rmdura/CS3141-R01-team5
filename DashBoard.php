@@ -8,11 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-		<?php
-		require_once('connection.php');
-		$result = $conn->prepare("SELECT * FROM Student ORDER BY username ASC");
-		$result->execute();
-		?>
 	<p>Successful login.</p>
 </body>
 </html>
