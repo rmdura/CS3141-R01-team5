@@ -7,6 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 <body>
     <section class="header">
@@ -332,6 +334,20 @@ if (isset($_POST["signupUsername"]) && isset($_POST['signupPassword']) && isset(
                 </div>
             </div>
         </div>
+    </section>
+    <section class="footer">
+    	<h4>
+            Connect with Us!
+        </h4>
+        <div class="icons">
+            <i class="fa fa-facebook"></i>
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-instagram"></i>
+            <i class="fa fa-linkedin"></i>
+        </div>
+        <p>
+            Made by Team 5
+        </p>
     </section>
 </body>
 </html>
