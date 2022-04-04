@@ -16,7 +16,7 @@
 
 <!-- Start of database connection and editing --> 
 <?php
-if (isset($_POST["newEventTitle"]) && isset($_POST['newEventDate']) && isset($_POST['newEventTime']) && isset($_POST['newEventLocation']) && isset($_POST['newEventDescription'])) 
+if (isset($_POST["newEventTitle"]) && isset($_POST['newEventDate']) && isset($_POST['newEventTime']) && isset($_POST['newEventLocation']) && isset($_POST['newEventDescription']) && isset($_POST['newEventTag'])) 
 {
 		$name = $_POST["newEventTitle"]; // variable name is the value in the eventTitle text box
 
