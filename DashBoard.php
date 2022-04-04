@@ -11,7 +11,7 @@
 <body>
 	<section class="header">
 	    <nav>
-	    	// Uses the logo to lead to their DashBoard since they are logged in.
+			<!--Uses the logo to lead to their DashBoard since they are logged in.-->
 	        <a href = "DashBoard.php"><img src="images/logo.png"></a>
 	    </nav>
 	</section>
@@ -26,7 +26,7 @@
 			die();
 		}
 	?>
-	// Creates a table with 5 columns on the website.
+	<!--Creates a table with 5 columns on the website.-->
 	<table>
 		<tr>
 			<th>Event</th>
@@ -38,7 +38,7 @@
 		<?php
 			// Pulls data for the table above from the database.
 			$sql = "SELECT name, event_time, event_date, location, description from Event";
-			$result = $dbh-> query($sql);
+			$result = $config-> query($sql);
 			
 			// Checks if there are any results.
 			if($result-> num_rows > 0) {
@@ -47,7 +47,7 @@
 				}
 			echo "</table";
 			} else {
-				echo "0 results";
+				echo "0 result";
 			}
 			
 			// Closes connection to the database.
