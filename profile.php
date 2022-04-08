@@ -1,3 +1,6 @@
+<?php
+    include('profileSession.php');
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -5,16 +8,6 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <!-- Connect to the local database -->
-        <?php
-            $host = "localhost";
-            $user = "root";
-            $password = "";
-            $database = "accounts";
-            $conn = mysqli_connect($host, $user, $password, $database);
-            $username = 'bob'; //current user's username
-            $results = $conn->query("select * from students where username='$username'"); //select user's information
-        ?>
         <!-- Fetch the current user's account information --> 
         <table>
             <tr>
@@ -24,21 +17,19 @@
                 <th>Birthdate</th>
             </tr>
 
-            <?php while ($data = $results->fetch_assoc()):?>
-                <?php print_r($data);?>
-                <tr>
-                    <td><?php echo $data['username'] ?></td>
-                    <td><?php echo $data['email'] ?></td>
-                    <td><?php echo $data['password'] ?></td>
-                    <td><?php echo $data['birthdate'] ?></td>
-                </tr>
-            <?php endwhile;?>
+            <tr>
+                <td><?php echo $username ?></td>
+                <td><?php echo $email ?></td>
+                <td><?php echo $password ?></td>
+                <td><?php echo $birthdate ?></td>
+            </tr>
         </table>
         <!-- Editing of current user's account information -->
-        
+
         
         <!-- Side navigation -->
         <div class="sidenav">
+            <a href="#">Profile</a>
             <a href="#">Edit Profile</a>
             <a href="#">Interest Tags</a>
             <a href="#">Settings</a>
