@@ -1,4 +1,16 @@
 <?php
+session_start(); // start session
+
+if (isset($_SESSION["locked"])) // if session is locked, check if enough time has passed and unlock if so
+{
+	$difference = time() - $_SESSION["locked"];
+	if ($difference > 30)
+	{
+		unset($_SESSION["locked"]);
+		$_SESSION["login_attempts"] = 0;
+	}
+}
+
 // must define cookies before any html (throws warning otherwise)
 if (isset($_POST["testUsername"]) && isset($_POST['testPassword'])) 
 {
@@ -106,8 +118,9 @@ if (isset($_POST["testUsername"]) && isset($_POST['testPassword']))
 
 <!-- LOGIN PHP -->
 <?php
-if (isset($_POST["testUsername"]) && isset($_POST['testPassword'])) 
+if (isset($_POST["testUsername"]) && isset($_POST['testPassword']) && $_SESSION["login_attempts"] < 3) 
 {
+
 	$password = sha1($_POST['testPassword']); // hashes using sha1 algorithm
 	try{
 		$config = parse_ini_file("ProjectDB.ini"); // find database info in .ini file
@@ -123,17 +136,21 @@ if (isset($_POST["testUsername"]) && isset($_POST['testPassword']))
 
   		if (! $loginfound) //result did not return an account
    		{
+			$_SESSION["login_attempts"] += 1; // increment failed login attempts
+			if (isset($_SESSION["locked"]))
+			{} else{
 			//script will produce popup, which shows the message and returns to index.php when the popup is exited
 			?>
 			<script> alert ("Login failed.  Please make sure that you have entered valid credentials and try again.")</script>
 			<?php
+			}
   		}
    		else
    		{
 			//Login successful, shows popup then redirects to next page.
 			?>
 			<script> alert ("Successful Login!")
-			window.location.href='DashBoard.php';
+			window.location.href='LoggedIn.php'; // directs to LoggedIn for now to test cookies
 			</script>
 			<?php
         		
@@ -162,9 +179,17 @@ if (isset($_POST["testUsername"]) && isset($_POST['testPassword']))
 		    <div class="password">
                         <input type="password" placeholder="Password" name = "testPassword">
                     </div>
+			<?php
+				if ($_SESSION["login_attempts"] > 2) // print lock message and remove login button if locked out
+				{
+					$_SESSION["locked"] = time();
+					echo '<i style="color:red;font-family:calibri ;">Locked out.  Please wait 30 seconds. </i> ';
+				} else{
+			?>
 		</div>
 			<input type = "submit" name = "ok" value = "LOGIN" class ="signin-btn">
-                   
+                   	
+			<?php } ?>
                 </form>
 		
 			<div class="options">
