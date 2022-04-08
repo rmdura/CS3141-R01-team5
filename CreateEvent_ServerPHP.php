@@ -46,11 +46,15 @@ if (isset($_POST["newEventTitle"]) && isset($_POST['newEventDate']) && isset($_P
 		}
 		try{
             // Santizing the string this way is a little safer than using $_POST['tag_array']
-            $tagArray = filter_input(INPUT_POST, 'tag_array', FILTER_SANITIZE_STRING);
+            //$tagArray = filter_input(INPUT_POST, 'tag_array', FILTER_SANITIZE_STRING);
+            
+			// Turn the sanitized JSON string into a PHP object
+            //$tags = json_decode($tagArray);
+            //$tags = explode(",", $tags);
 
-            // Turn the sanitized JSON string into a PHP object
-            $tags = json_decode($tagArray);
-            $tags = explode(",", $tags);
+			//$json = $_POST['myData'];
+			//$tags = json_decode($json,true);
+			$tags = explode(",", $_GET['Itags']);
             
             $stmt = $dbh->prepare("INSERT INTO `Event_Tag` (`event_id`, `tag_name`) VALUES (:eventInd, :eventTag)");
             $stmt->bindParam(':eventInd', $eventIndex);

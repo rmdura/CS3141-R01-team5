@@ -8,22 +8,14 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <!-- Fetch the current user's account information --> 
-        <table>
-            <tr>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Password</th>
-                <th>Birthdate</th>
-            </tr>
-
-            <tr>
-                <td><?php echo $username ?></td>
-                <td><?php echo $email ?></td>
-                <td><?php echo $password ?></td>
-                <td><?php echo $birthdate ?></td>
-            </tr>
-        </table>
+        <!-- Editing of current user's account information -->
+        <h3>Edit Profile</h3>
+        <form method = "post" >
+            Email: <input type = "text" name = "newEmail" /><br />
+            Birthdate: <input type = "date" name = "newBirthdate" /><br />
+            Password: <input type = "password" name = "newPassword" /><br />
+            <input type = "submit" name = "ok" value = "Create Account">
+        </form>
 
         <!-- Side navigation -->
         <div class="sidenav">
