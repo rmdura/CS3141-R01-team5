@@ -32,9 +32,40 @@
 		<span id="search_result"></span>
 	</div>
 	<input type = "submit" name = "ok" value = "Create Event">
-   	</form>
 	<button onclick="AddInterest()">Add Interest</button>
 	<p id="InterestList"></p>
+   	</form>
+
+<script>
+    var tag_array = []
+
+    function AddInterest() {
+        tag_array.push(document.getElementById("newEventTag").value)
+
+        PopulateList(tag_array);
+    }
+
+    function PopulateList(arr) {
+        LLen = arr.length;
+
+        text = "<ol>";
+        for (i = 0; i < LLen; i++) {
+            text += "<li>" + arr[i] + "<input type='button' onclick='Delitem(" + i + ")' value='Delete' /></li>";
+        }
+        text += "</ol>";
+
+        document.getElementById("InterestList").innerHTML = text;
+    }
+
+    function Delitem(index) {
+        tag_array.splice(index, 1);
+        PopulateList(tag_array);
+    }
+
+	var src="CreateEvent_ServerPHP.php?Itags="+tag_array;
+	window.location=src;
+</script>
+
 </body>
 </html>
 
@@ -95,40 +126,4 @@ function load_data(query)
 	}
 }
 
-</script>
-
-<script>
-    var tag_array = []
-
-    function AddInterest() {
-        tag_array.push(document.getElementById("newEventTag").value)
-
-        PopulateList(tag_array);
-    }
-
-    function PopulateList(arr) {
-        LLen = arr.length;
-
-        text = "<ol>";
-        for (i = 0; i < LLen; i++) {
-            text += "<li>" + arr[i] + "<input type='button' onclick='Delitem(" + i + ")' value='Delete' /></li>";
-        }
-        text += "</ol>";
-
-        document.getElementById("InterestList").innerHTML = text;
-    }
-
-    function Delitem(index) {
-        tag_array.splice(index, 1);
-        PopulateList(tag_array);
-    }
-</script>
-
-<script>
-	$.ajax({
-	type: 'POST',
-	data: tag_array,
-	dataType: 'json',
-	url: 'CreateEvent_ServerPHP.php'
-	});
 </script>
