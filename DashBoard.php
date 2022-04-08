@@ -21,7 +21,7 @@
 			$dbh = new PDO($config['dsn'], $config['username'], $config['password']); // create connection to database
 			$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // error checking
 		} catch (PDOException $e) {
-			//print error messages if query could not be performed due to backend/database issues
+			// print error messages if query could not be performed due to backend/database issues
 			print $e->getMessage();
 			die();
 		}
@@ -37,21 +37,18 @@
 		</tr>
 		<?php
 			// Pulls data for the table above from the database.
-			$sql = "SELECT name, event_time, event_date, location, description from Event";
-			$result = $config-> query($sql);
+			$sql = "SELECT name, event_time, event_date, location, description FROM Event WHERE (SELECT event_id FROM Student_Event WHERE Event.event_index=event_id)";
+			$result = $dbh->query($sql);
 			
 			// Checks if there are any results.
-			if($result-> num_rows > 0) {
-				while($row = $result-> fetch_assoc()) {
+			if($result->rowCount() > 0) {
+				while($row = $result->fetch_assoc()) {
 					echo "<tr><td>". $row["Event"]."</td><td>". $row["Time"]."</td><td>". $row["Date"]."</td><td>". $row["Location"]."</td><td>". $row["Description"]."</td></tr>";
 				}
 			echo "</table";
 			} else {
 				echo "0 result";
 			}
-			
-			// Closes connection to the database.
-			$dbh-> close();
 		?>
 	</table>
 </body>
