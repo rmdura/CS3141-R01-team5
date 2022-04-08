@@ -1,5 +1,5 @@
 <?php
-if (isset($_POST["newEventTitle"]) && isset($_POST['newEventDate']) && isset($_POST['newEventTime']) && isset($_POST['newEventLocation']) && isset($_POST['newEventDescription']))
+if (isset($_POST['Submit']))
 {
 
     $config = parse_ini_file("ProjectDB.ini"); // find database info in .ini file
@@ -26,6 +26,9 @@ if (isset($_POST["newEventTitle"]) && isset($_POST['newEventDate']) && isset($_P
         $eventIndex=intval($eventIndex);
 		$eventIndex = $eventIndex + 1;
 
+		$tag_data = $_POST['str'];
+		$tags = explode(",", $tag_data);
+
 		try{			
 			$query = "Insert into Event(name, event_date, event_time, location, description, event_index) values(:newEventTitle, :newEventDate, :newEventTime, :newEventLocation, :newEventDescription, :eventInd)"; //query to create new event
 			$step = $dbh->prepare($query); //prepare statement to prevent SQL injection
@@ -44,18 +47,7 @@ if (isset($_POST["newEventTitle"]) && isset($_POST['newEventDate']) && isset($_P
 			print $e->getMessage();
 			die();
 		}
-		try{
-            // Santizing the string this way is a little safer than using $_POST['tag_array']
-            //$tagArray = filter_input(INPUT_POST, 'tag_array', FILTER_SANITIZE_STRING);
-            
-			// Turn the sanitized JSON string into a PHP object
-            //$tags = json_decode($tagArray);
-            //$tags = explode(",", $tags);
-
-			//$json = $_POST['myData'];
-			//$tags = json_decode($json,true);
-			$tags = explode(",", $_GET['Itags']);
-            
+		try{         
             $stmt = $dbh->prepare("INSERT INTO `Event_Tag` (`event_id`, `tag_name`) VALUES (:eventInd, :eventTag)");
             $stmt->bindParam(':eventInd', $eventIndex);
             $stmt->bindParam(':eventTag', $tag);

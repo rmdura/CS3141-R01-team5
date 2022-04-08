@@ -21,50 +21,22 @@
 <?php include 'CreateEvent_ServerPHP.php';?>
 
 <h3>Event Information</h3>
-	<form method = "post" >
+	<form id="CreateEventForm" action="CreateEvent_ServerPHP.php" method = "post" >
+	<input type="hidden" id="str" name="str" value="" />
 	Title: <input type = "text" name = "newEventTitle" /><br />
 	Date: <input type = "date" name = "newEventDate" /><br />
 	Time: <input type = "time" name = "newEventTime" /><br />
 	Location: <input type = "text" name = "newEventLocation" /><br />
 	Description: <textarea name = "newEventDescription"></textarea><br />
 	<div class="dropdown">
-		Tag 1: <input type="text" name="newEventTag" class="form-control form-control-lg" placeholder="Type Here..." id="newEventTag" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeyup="javascript:load_data(this.value)"/>
+		Tag: <input type="text" name="newEventTag" class="form-control form-control-lg" placeholder="Type Here..." id="newEventTag" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeyup="javascript:load_data(this.value)"/>
 		<span id="search_result"></span>
 	</div>
-	<input type = "submit" name = "ok" value = "Create Event">
-	<button onclick="AddInterest()">Add Interest</button>
-	<p id="InterestList"></p>
+	<input type = "submit" name = "Submit" id="btn" value = "Create Event">
    	</form>
 
-<script>
-    var tag_array = []
-
-    function AddInterest() {
-        tag_array.push(document.getElementById("newEventTag").value)
-
-        PopulateList(tag_array);
-    }
-
-    function PopulateList(arr) {
-        LLen = arr.length;
-
-        text = "<ol>";
-        for (i = 0; i < LLen; i++) {
-            text += "<li>" + arr[i] + "<input type='button' onclick='Delitem(" + i + ")' value='Delete' /></li>";
-        }
-        text += "</ol>";
-
-        document.getElementById("InterestList").innerHTML = text;
-    }
-
-    function Delitem(index) {
-        tag_array.splice(index, 1);
-        PopulateList(tag_array);
-    }
-
-	var src="CreateEvent_ServerPHP.php?Itags="+tag_array;
-	window.location=src;
-</script>
+	<button onclick="AddInterest()">Add Interest</button>
+	<p id="InterestList"></p>
 
 </body>
 </html>
@@ -126,4 +98,42 @@ function load_data(query)
 	}
 }
 
+</script>
+
+<script type="text/javascript">
+	var tag_array = new Array();
+
+	function AddInterest() {
+		tag_array.push(document.getElementById("newEventTag").value)
+
+		PopulateList(tag_array);
+	}
+
+	function PopulateList(arr) {
+		LLen = arr.length;
+
+		
+		text = "<ol>";
+		for (i = 0; i < LLen; i++) {
+			text += "<li>" + arr[i] + "<input type='button' onclick='Delitem(" + i + ")' value='Delete' /></li>";
+
+		}
+		text += "</ol>";
+
+		document.getElementById("InterestList").innerHTML = text;
+
+		text = arr[0];
+		for (i = 1; i < LLen; i++) {
+			text += "," + arr[i];
+		}
+
+		oFormObject = document.forms['CreateEventForm'];
+		oFormObject.elements["str"].value = text;
+	}
+
+	function Delitem(index) {
+		tag_array.splice(index, 1);
+		PopulateList(tag_array);
+	}
+	
 </script>
