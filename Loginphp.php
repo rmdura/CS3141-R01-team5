@@ -29,6 +29,8 @@ if (isset($_POST["testUsername"]) && isset($_POST['testPassword']) && $_SESSION[
    		else
    		{
 			//Login successful, shows popup then redirects to next page.
+			unset($_SESSION["locked"]);
+			$_SESSION["login_attempts"] = 0;
 			?>
 			<script> alert ("Successful Login!")
 			window.location.href='DashBoard.php'; 

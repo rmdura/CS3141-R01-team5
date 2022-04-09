@@ -1,3 +1,28 @@
+<?php
+session_start(); // start session
+
+if (isset($_SESSION["login_attempts"])) // initialize login attempts if session is starting
+{} else{
+	$_SESSION["login_attempts"] = 0;
+}
+
+if (isset($_SESSION["locked"])) // if session is locked, check if enough time has passed and unlock if so
+{
+	$difference = time() - $_SESSION["locked"];
+	if ($difference > 30)
+	{
+		unset($_SESSION["locked"]);
+		$_SESSION["login_attempts"] = 0;
+	}
+}
+
+// must define cookies before any html (throws warning otherwise)
+if (isset($_POST["testUsername"]) && isset($_POST['testPassword'])) 
+{
+	$username = $_POST["testUsername"]; // variable username is the value in the username text box
+	setcookie("username",$username); // set cookie so username can be used later
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,40 +103,53 @@
 </main>
 
 </section>
+
+<!-- LOGIN PHP -->
+<?php include 'Loginphp.php'; ?>
+
     <!-- Login Button Section -->
     <section>
         <div id="id01" class="modal">
             <div class="login-div">
                 <div class="title">College Socializing Platform</div>
 
-                <div class="form">
+		<div class="form">
+                <form method = "post" >
                     <div class="username">
-                        <input type="text" placeholder="Username">
+                        <input type="text" placeholder="Username" name="testUsername">
+            	    </div>
+		    <div class="password">
+                        <input type="password" placeholder="Password" name = "testPassword">
                     </div>
-
-                    <div class="password">
-                        <input type="password" placeholder="Password">
-                    </div>
-
-                    <div class="options">
+			<?php
+				if ($_SESSION["login_attempts"] > 2) // print lock message and remove login button if locked out
+				{
+					$_SESSION["locked"] = time();
+					echo '<i style="color:red;font-family:calibri ;">Locked out.  Please wait 30 seconds. </i> ';
+				} else{
+			?>
+		</div>
+			<input type = "submit" name = "ok" value = "LOGIN" class ="signin-btn">
+                   	
+			<?php } ?>
+                </form>
+		
+			<div class="options">
                         <div class="remember-me">
                             <input id="remember-me" type="checkbox">
                             <label for="remember-me">Remember me?</label>
                         </div>
 
                         <div class="forgot-password">
-                            <a href="#">Forget Password?</a>
+                            <a href="newPassword.php">Forget Password?</a>
                         </div>
                     </div>
-
-                    <button class="signin-btn">LOGIN</button>
-                    
                     <div class="sign-up">
-                        <a href="#">New to College Socializing Platform?</a>
+                        <button onclick="document.getElementById('id02').style.display='block'" class="signin-btn">New to College Socializing Platform?</button>
                     </div>
 
                     <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancel-btn">Cancel</button>
-                </div>
+           
             </div>
         </div>
 
@@ -139,6 +177,43 @@
 
         </script>
     </section>
+
+<!-- SIGNUP PHP -->
+<?php include 'Signupphp.php'; ?>
+
+    <!-- Signup Button Section -->
+    <section>
+        <div id="id02" class="modal">
+            <div class="login-div">
+                <div class="title">Welcome to College Socializing Platform</div>
+
+                <div class="form">
+                    <form method = "post" >
+                        <div class="newUsername">
+                            <input type="text" placeholder="Username" name = "signupUsername">
+                        </div>
+
+                        <div class="newEmail">
+                            <input type="text" placeholder="Email" name = "signupEmail">
+                        </div>
+
+                        <div class="newBirthdate">
+                            <input placeholder = "Birthdate" class = "textbox-n" type = "text" onfocus = "(this.type = 'date')"  id = "date" name = "signupBirthdate">
+                        </div>
+
+                        <div class="newPassword">
+                            <input type="password" placeholder="Password" name = "signupPassword">
+                        </div>
+		</div>
+                        <input type = "submit" name = "ok" value = "Create Account" class ="signin-btn">
+                    </form>
+
+                    <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancel-btn">Cancel</button>
+                
+            </div>
+        </div>
+    </section>
+
     <section class="footer">
         <h4>
             Connect with Us!
