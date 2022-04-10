@@ -30,8 +30,7 @@
             <a href="profile.php">Profile</a>
             <a href="profileEdit.php">Edit Profile</a>
             <a href="#">Interest Tags</a> <!-- Skip to Interest Tags section on profile.php maybe or create a new .php for it -->
-            <a href="#">Settings</a>
-            <a href="#">Go Back</a>
+            <a href="DashBoard.php">Go Back</a>
         </div>
     </body>
 </html>

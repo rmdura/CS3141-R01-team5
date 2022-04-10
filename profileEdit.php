@@ -14,7 +14,7 @@
             Email: <input type = "text" name = "newEmail" /><br />
             Birthdate: <input type = "date" name = "newBirthdate" /><br />
             Password: <input type = "password" name = "newPassword" /><br />
-            <input type = "submit" name = "ok" value = "Create Account">
+            <input type = "submit" name = "ok" value = "Edit Account">
         </form>
 
         <!-- Side navigation -->
@@ -22,8 +22,7 @@
             <a href="profile.php">Profile</a>
             <a href="profileEdit.php">Edit Profile</a>
             <a href="#">Interest Tags</a> <!-- Skip to Interest Tags section on profile.php maybe or create a new .php for it -->
-            <a href="#">Settings</a>
-            <a href="#">Go Back</a>
+            <a href="DashBoard.php">Go Back</a>
         </div>
     </body>
 </html>
