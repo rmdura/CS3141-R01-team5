@@ -8,35 +8,74 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/> -->
 
 </head>
 
-<header>Create Event Page</header>
+<header>
+
+</header>
 
 <body>
+
+<style>
+input{
+	margin-bottom: 20px;
+}
+textarea{
+	margin-bottom: 20px;
+}
+.container{
+	width: 100%;
+	box-sizing: border-box;
+    overflow: hidden;
+
+	position: absolute;
+	top: 25%;
+	left: 25%;
+	text-align: left;
+	border-style: solid;
+	border-width: 5px;
+	display: inline-block;
+}
+.encapsulation{
+	position: relative;
+	left: 33%;
+}
+.createEventHeader{
+	width: 100%;
+	text-align: center;
+	font-size: 24px;
+
+}
+</style>
 
 <!-- Start of database connection and editing --> 
 <?php include 'CreateEvent_ServerPHP.php';?>
 
-<h3>Event Information</h3>
+<h3 class="createEventHeader">Create An Event</h3>
 	<form id="CreateEventForm" action="CreateEvent_ServerPHP.php" method = "post" >
 	<input type="hidden" id="str" name="str" value="" />
-	Title: <input type = "text" name = "newEventTitle" /><br />
-	Date: <input type = "date" name = "newEventDate" /><br />
-	Time: <input type = "time" name = "newEventTime" /><br />
-	Location: <input type = "text" name = "newEventLocation" /><br />
-	Description: <textarea name = "newEventDescription"></textarea><br />
-	<div class="dropdown">
-		Tag: <input type="text" name="newEventTag" class="form-control form-control-lg" placeholder="Type Here..." id="newEventTag" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeyup="javascript:load_data(this.value)"/>
-		<span id="search_result"></span>
+	<div class="container">
+		<div class="encapsulation">
+			Title:<br /> <input type = "text" name = "newEventTitle" /><br />
+			Date:<br /> <input type = "date" name = "newEventDate" /><br />
+			Time:<br /> <input type = "time" name = "newEventTime" /><br />
+			Location:<br /> <input type = "text" name = "newEventLocation" /><br />
+			Description:<br /> <textarea name = "newEventDescription"></textarea><br />
+			<div class="dropdown">
+				Interest Tags:<br /> <input type="text" name="newEventTag" class="form-control form-control-lg" placeholder="Type Here..." id="newEventTag" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeyup="javascript:load_data(this.value)"/>
+				<span id="search_result"></span>
+			</div>
+			<button class="InterestButton" onclick="AddInterest()">Add Interest</button>
+			<input type = "submit" name = "Submit" id="btn" value = "Create Event">
+		</div>
 	</div>
-	<input type = "submit" name = "Submit" id="btn" value = "Create Event">
    	</form>
-
-	<button onclick="AddInterest()">Add Interest</button>
-	<p id="InterestList"></p>
+	<div class="displayInterests">
+		<p id="InterestList"></p>
+	</div>
 
 </body>
 </html>

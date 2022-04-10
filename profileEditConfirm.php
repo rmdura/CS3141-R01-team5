@@ -8,27 +8,19 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <!-- Fetch the current user's account information --> 
-        <table>
-            <tr>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Password</th>
-                <th>Birthdate</th>
-            </tr>
+        <h3>Confirm Current Password To Continue</h3>
+        <form method = "post">
+            Password: <input type = "password" name = "confirmPassword" /><br />
+            <input type = "submit" name = "ok" value = "Confirm">
+        </form>
 
-            <tr>
-                <td><?php echo $username ?></td>
-                <td><?php echo $email ?></td>
-                <td><?php echo $password ?></td>
-                <td><?php echo $birthdate ?></td>
-            </tr>
-        </table>
+        <!-- Go back to profile.php -->
+        <a href="profile.php">Cancel</a>
 
         <!-- Side navigation -->
         <div class="sidenav">
             <a href="profile.php">Profile</a>
-            <a href="profileEdit.php">Edit Profile</a>
+            <a href="profileEditConfirm.php">Edit Profile</a>
             <a href="#">Interest Tags</a> <!-- Skip to Interest Tags section on profile.php maybe or create a new .php for it -->
             <a href="DashBoard.php">Go Back</a>
         </div>
