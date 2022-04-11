@@ -1,0 +1,42 @@
+<style>
+    .menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 10%;
+        height: 100%;
+        background-color: #7e7e7e;
+        border-right: 1px solid #333;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .menuLogo {
+        width: 70%;
+        display: block;
+        margin-bottom: 35px;
+    }
+    .menuItem {
+        display: inline-block;
+        text-decoration: none;
+        padding: 5px 15px;
+        font-size: 0.9em;
+        font-weight: bold;
+        color: #29226a;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+    .menuItem:hover {
+        color: #982300;
+    }
+</style>
+
+<div class="menu">
+    <img src="images/logo.png" class="menuLogo">
+    <a href="#" class="menuItem">Dashboard</a>
+    <a href="#" class="menuItem">Create Event</a>
+    <a href="#" class="menuItem">Find Events</a>
+    <a href="#" class="menuItem">Account Settings</a>
+    <a href="#" class="menuItem">Logout</a>
+</div>

@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta name="viewport" content="with=device-width, initial-scale=1.0">
+	<meta name="viewport" content="with=device-width, initial-scale=1.0">
 	<meta charset="utf-8" />
-    <title>MTU Student Socializing Platform</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<title>MTU Student Socializing Platform</title>
+	<link rel="stylesheet" href="style.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700&display=swap" rel="stylesheet">
-	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/> -->
-
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 </head>
 
 <header>
@@ -18,161 +18,88 @@
 </header>
 
 <body>
+	<?php include 'LeftFloatingNavBar.html'; ?>
 
-<style>
-input{
-	margin-bottom: 20px;
-}
-textarea{
-	margin-bottom: 20px;
-}
-.container{
-	width: 100%;
-	box-sizing: border-box;
-    overflow: hidden;
+	<style>
+		input {
+			margin-bottom: 20px;
+		}
 
-	position: absolute;
-	top: 25%;
-	left: 25%;
-	text-align: left;
-	border-style: solid;
-	border-width: 5px;
-	display: inline-block;
-}
-.encapsulation{
-	position: relative;
-	left: 33%;
-}
-.createEventHeader{
-	width: 100%;
-	text-align: center;
-	font-size: 24px;
+		textarea {
+			margin-bottom: 20px;
+		}
 
-}
-</style>
+		.container {
+			width: 100%;
+			box-sizing: border-box;
+			overflow: hidden;
+			margin-left: 15%;
+			position: absolute;
+			top: 25%;
+			left: 15%;
+			text-align: left;
+			border-style: solid;
+			border-width: 4px;
+			border-color: #EFEFEF;
+			display: inline-block;
+			background: #D5D5D5;
+			border-radius: 25px;
+		}
 
-<!-- Start of database connection and editing --> 
-<?php include 'CreateEvent_ServerPHP.php';?>
+		.encapsulation {
+			position: relative;
+			left: 33%;
+		}
 
-<h3 class="createEventHeader">Create An Event</h3>
-	<form id="CreateEventForm" action="CreateEvent_ServerPHP.php" method = "post" >
-	<input type="hidden" id="str" name="str" value="" />
+		.createEventHeader {
+			width: 100%;
+			text-align: center;
+			font-size: 24px;
+
+		}
+
+		.customFormControl {
+			width: 60%;
+		}
+
+		.InterestButton {
+			margin: 5px;
+		}
+
+		.customDrop {
+		}
+	</style>
+
+	<!-- Start of database connection and editing -->
+	<?php include 'CreateEvent_ServerPHP.php'; ?>
+
 	<div class="container">
-		<div class="encapsulation">
-			Title:<br /> <input type = "text" name = "newEventTitle" /><br />
-			Date:<br /> <input type = "date" name = "newEventDate" /><br />
-			Time:<br /> <input type = "time" name = "newEventTime" /><br />
-			Location:<br /> <input type = "text" name = "newEventLocation" /><br />
-			Description:<br /> <textarea name = "newEventDescription"></textarea><br />
-			<div class="dropdown">
-				Interest Tags:<br /> <input type="text" name="newEventTag" class="form-control form-control-lg" placeholder="Type Here..." id="newEventTag" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeyup="javascript:load_data(this.value)"/>
-				<span id="search_result"></span>
+		<h3 class="createEventHeader">Create An Event</h3>
+		<form id="CreateEventForm" action="CreateEvent_ServerPHP.php" method="post">
+			<input type="hidden" id="str" name="str" value="" />
+			<div class="encapsulation">
+				Title:<br /> <input type="text" name="newEventTitle" /><br />
+				Date:<br /> <input type="date" name="newEventDate" /><br />
+				Time:<br /> <input type="time" name="newEventTime" /><br />
+				Location:<br /> <input type="text" name="newEventLocation" /><br />
+				Description:<br /> <textarea name="newEventDescription"></textarea><br />
+				Interest Tags:<br /> 
+				<div class="dropdown customDrop">
+					<input type="text" name="newEventTag" class="form-control form-control-lg customFormControl" placeholder="Type Here..." id="newEventTag" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeyup="javascript:load_data(this.value)">
+					<span id="search_result"></span>
+				</div>
+				<button type="button" class="InterestButton" onclick="AddInterest()">Add Tag</button>
+				<div class="displayInterests">
+					<p id="InterestList"></p>
+				</div>
+				<input type="submit" name="Submit" id="btn" value="Create Event" class="submitButton">
 			</div>
-			<button class="InterestButton" onclick="AddInterest()">Add Interest</button>
-			<input type = "submit" name = "Submit" id="btn" value = "Create Event">
-		</div>
-	</div>
-   	</form>
-	<div class="displayInterests">
-		<p id="InterestList"></p>
+		</form>
+
 	</div>
 
 </body>
+
 </html>
 
-<script>
-
-function get_text(event)
-{
-	var string = event.textContent;
-
-	document.getElementsByName('newEventTag')[0].value = string;
-	
-	document.getElementById('search_result').innerHTML = '';
-}
-
-function load_data(query)
-{
-	if(query.length > 2)
-	{
-		var form_data = new FormData();
-
-		form_data.append('query', query);
-
-		var ajax_request = new XMLHttpRequest();
-
-		ajax_request.open('POST', 'process_data.php');
-
-		ajax_request.send(form_data);
-
-		ajax_request.onreadystatechange = function()
-		{
-			if(ajax_request.readyState == 4 && ajax_request.status == 200)
-			{
-				var response = JSON.parse(ajax_request.responseText);
-
-				var html = '<div class="list-group">';
-
-				if(response.length > 0)
-				{
-					for(var count = 0; count < response.length; count++)
-					{
-						html += '<a href="#" class="list-group-item list-group-item-action" onclick="get_text(this)">'+response[count].name+'</a>';
-					}
-				}
-				else
-				{
-					html += '<a href="#" class="list-group-item list-group-item-action disabled">No Data Found</a>';
-				}
-
-				html += '</div>';
-
-				document.getElementById('search_result').innerHTML = html;
-			}
-		}
-	}
-	else
-	{
-		document.getElementById('search_result').innerHTML = '';
-	}
-}
-
-</script>
-
-<script type="text/javascript">
-	var tag_array = new Array();
-
-	function AddInterest() {
-		tag_array.push(document.getElementById("newEventTag").value)
-
-		PopulateList(tag_array);
-	}
-
-	function PopulateList(arr) {
-		LLen = arr.length;
-
-		
-		text = "<ol>";
-		for (i = 0; i < LLen; i++) {
-			text += "<li>" + arr[i] + "<input type='button' onclick='Delitem(" + i + ")' value='Delete' /></li>";
-
-		}
-		text += "</ol>";
-
-		document.getElementById("InterestList").innerHTML = text;
-
-		text = arr[0];
-		for (i = 1; i < LLen; i++) {
-			text += "," + arr[i];
-		}
-
-		oFormObject = document.forms['CreateEventForm'];
-		oFormObject.elements["str"].value = text;
-	}
-
-	function Delitem(index) {
-		tag_array.splice(index, 1);
-		PopulateList(tag_array);
-	}
-	
-</script>
+<script src="CreateEvent_Javascript.js"></script>
