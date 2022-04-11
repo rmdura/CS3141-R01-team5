@@ -33,9 +33,10 @@
 		</tr>
 		
 		<?php
+			// The username used for checking joined/owned events (Currently for testing purposes).
 			$user='pjellens';
 			
-			// Pulls joined events data for the table above from the database.
+			// Pulls joined events data from the database.
 			$sql = "SELECT name, event_time, event_date, location, description FROM Event 
 				WHERE event_index IN (SELECT event_id FROM Student_Event WHERE student_name='$user')";
 			$result = $dbh->query($sql);
@@ -48,7 +49,7 @@
 				}
 			}
 			
-			// Pulls owned events data for the table above from the database.
+			// Pulls owned event data from the database.
 			$sql = "SELECT name, event_time, event_date, location, description FROM Event WHERE owner='$user'";
 			$result = $dbh->query($sql);
 			
