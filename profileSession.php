@@ -145,6 +145,6 @@
     //end profile session
     if(!isset($currentUser)) {
         session_destroy();
-        header("Location: DashBoard.php"); //redirect to DashBoard
+        header("Location: index.php"); //redirect to index
     }
 ?>
