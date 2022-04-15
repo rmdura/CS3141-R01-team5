@@ -78,11 +78,11 @@
 		<form id="CreateEventForm" action="CreateEvent_ServerPHP.php" method="post">
 			<input type="hidden" id="str" name="str" value="" />
 			<div class="encapsulation">
-				Title:<br /> <input type="text" name="newEventTitle" /><br />
-				Date:<br /> <input type="date" name="newEventDate" /><br />
-				Time:<br /> <input type="time" name="newEventTime" /><br />
-				Location:<br /> <input type="text" name="newEventLocation" /><br />
-				Description:<br /> <textarea name="newEventDescription"></textarea><br />
+				Title:*<br /> <input type="text" name="newEventTitle" maxlength="50" required/><br />
+				Date:*<br /> <input type="date" id="datefield" name="newEventDate" min='1899-01-01' required/><br />
+				Time:*<br /> <input type="time" name="newEventTime" required/><br />
+				Location:*<br /> <input type="text" name="newEventLocation" maxlength="50" required/><br />
+				Description:*<br /> <textarea name="newEventDescription" maxlength="100" required></textarea><br />
 				Interest Tags:<br /> 
 				<div class="dropdown customDrop">
 					<input type="text" name="newEventTag" class="form-control form-control-lg customFormControl" placeholder="Type Here..." id="newEventTag" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeyup="javascript:load_data(this.value)">
@@ -93,6 +93,7 @@
 					<p id="InterestList"></p>
 				</div>
 				<input type="submit" name="Submit" id="btn" value="Create Event" class="submitButton">
+				<p>* Denotes a required field.</p>
 			</div>
 		</form>
 

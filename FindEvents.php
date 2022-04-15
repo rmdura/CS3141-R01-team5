@@ -8,7 +8,7 @@ $dbh = new PDO($config['dsn'], $config['username'], $config['password']); // cre
 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // error checking
   
 // SQL query to select data from database
-$eventQuery = $dbh->query("SELECT description, event_date, event_time, location, name FROM Event");
+$eventQuery = $dbh->query("SELECT event_index, description, event_date, event_time, location, name FROM Event");
 ?>
 
 <!-- HTML code to display -->
@@ -60,6 +60,11 @@ $eventQuery = $dbh->query("SELECT description, event_date, event_time, location,
     </style>
 </head>
 
+<?php
+// Starting a session
+session_start();
+?>
+
 <body>
 <?php include 'LeftFloatingNavBar.html'; ?>
 
@@ -84,6 +89,7 @@ $eventQuery = $dbh->query("SELECT description, event_date, event_time, location,
                 <th>event time:</th>
                 <th>location:</th>
                 <th>name:</th>
+                <th>join event:</th>
             </tr>
 
             <!-- PHP CODE TO FETCH DATA FROM ROWS-->
@@ -91,15 +97,17 @@ $eventQuery = $dbh->query("SELECT description, event_date, event_time, location,
                 while($rows=$eventQuery->fetch())
                 {
              ?>
-            <tr>
-                <!--FETCHING DATA FROM EACH 
-                    ROW OF EVERY COLUMN-->
-                <td><?php echo $rows['description'];?></td>
-                <td><?php echo $rows['event_date'];?></td>
-                <td><?php echo $rows['event_time'];?></td>
-                <td><?php echo $rows['location'];?></td>
-                <td><?php echo $rows['name'];?></td>
-            </tr>
+            <form action=JoinEvent.php method=post>
+                <tr>
+                    <!--FETCHING DATA FROM EACH ROW OF EVERY COLUMN-->
+                    <td><button type="submit" name="join" value="'.$rows['event_index'].'">Join Event</button></td>
+                    <td><?php echo $rows['description'];?></td>
+                    <td><?php echo $rows['event_date'];?></td>
+                    <td><?php echo $rows['event_time'];?></td>
+                    <td><?php echo $rows['location'];?></td>
+                    <td><?php echo $rows['name'];?></td>
+                </tr>
+            </form>
             <?php
                 }
              ?>
