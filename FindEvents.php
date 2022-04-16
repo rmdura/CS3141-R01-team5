@@ -84,11 +84,11 @@ session_start();
         <!-- TABLE CONSTRUCTION-->
         <table>
             <tr>
+		<th>name:</th>
                 <th>description:</th>
                 <th>event date:</th>
                 <th>event time:</th>
                 <th>location:</th>
-                <th>name:</th>
                 <th>join event:</th>
             </tr>
 
@@ -100,12 +100,12 @@ session_start();
             <form action=JoinEvent.php method=post>
                 <tr>
                     <!--FETCHING DATA FROM EACH ROW OF EVERY COLUMN-->
-                    <td><button type="submit" name="join" value="'.$rows['event_index'].'">Join Event</button></td>
+		    <td><?php echo $rows['name'];?></td>
                     <td><?php echo $rows['description'];?></td>
                     <td><?php echo $rows['event_date'];?></td>
                     <td><?php echo $rows['event_time'];?></td>
                     <td><?php echo $rows['location'];?></td>
-                    <td><?php echo $rows['name'];?></td>
+                    <td><button type="submit" name="join" value=<?php print_r($rows['event_index']);?>>Join Event</button></td>
                 </tr>
             </form>
             <?php
