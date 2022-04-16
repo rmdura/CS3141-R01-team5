@@ -5,38 +5,68 @@
         left: 0;
         width: 10%;
         height: 100%;
-        background-color: #7e7e7e;
-        border-right: 1px solid #333;
+        background-image: url(images/navBarImg.jpg);
+        border-right: 2px solid #333;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
     }
+
     .menuLogo {
         width: 70%;
         display: block;
         margin-bottom: 35px;
+        position: relative;
+        top: 10%;
+        align-content: center;
     }
-    .menuItem {
-        display: inline-block;
+
+    .menuItems {
+        flex: 1;
+        position: relative;
+        top: 15%;
+        align-items: center;
+        text-align: center;
+    }
+
+    .menuItems ul li {
+        list-style: none;
+        display: table;
+        padding: 8px 12px;
+        position: relative;
+    }
+
+    .menuItems ul li a {
+        color: #fff;
         text-decoration: none;
-        padding: 5px 15px;
-        font-size: 0.9em;
-        font-weight: bold;
-        color: #29226a;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
+        font-size: 13px;
     }
-    .menuItem:hover {
-        color: #982300;
+
+    .menuItems ul li::after {
+        content: '';
+        width: 0%;
+        height: 2px;
+        background: #f44336;
+        display: block;
+        margin: auto;
+        transition: 0.5s;
+    }
+
+    .menuItems ul li:hover::after {
+        width: 100%;
     }
 </style>
 
 <div class="menu">
     <img src="images/logo.png" class="menuLogo">
-    <a href="#" class="menuItem">Dashboard</a>
-    <a href="#" class="menuItem">Create Event</a>
-    <a href="#" class="menuItem">Find Events</a>
-    <a href="#" class="menuItem">Account Settings</a>
-    <a href="#" class="menuItem">Logout</a>
+    <div class="menuItems">
+        <ul>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Create Event</a></li>
+            <li><a href="#">Find Events</a></li>
+            <li><a href="#">Account Settings</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </div>
 </div>
