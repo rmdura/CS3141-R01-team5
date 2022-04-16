@@ -20,18 +20,14 @@
     if (isset($_POST['confirmPassword'])) {
         $confirmPassword = $_POST['confirmPassword'];
         if ($password == sha1($confirmPassword)) { //if the current hashed password matches, redirect to profileEdit.php
-            header("Location: profileEdit.php");
+            header("Location: profile.php");
         } elseif ($confirmPassword == "") { //check if password has been entered
             ?>
-            <script> alert ("Please enter your current password.")
-                window.location.href='profileEditConfirm.php';
-            </script>
+            <script> alert ("Please enter your current password to edit account settings.") </script>
             <?php
         } else { //password is incorrect
             ?>
-            <script> alert ("The password entered is incorrect. Please try again.")
-                window.location.href='profileEditConfirm.php';
-            </script>
+            <script> alert ("The current password entered is incorrect. Please try again.") </script>
             <?php
         }
     }
@@ -66,7 +62,7 @@
         if ($email == "") { //check if email has been entered
             ?>
             <script> alert ("Please enter email.")
-                window.location.href='profileEdit.php';
+                window.location.href='profile.php';
             </script>
             <?php
         } elseif (strpos($email, '@') == false) {//email address given is not valid (doesn't contain @)
@@ -80,7 +76,7 @@
         } elseif ($password == ""){ //check if password has been entered
             ?>
             <script> alert ("Please enter password.")
-                window.location.href='profileEdit.php';
+                window.location.href='profile.php';
             </script>
             <?php
         } elseif (!$uppercase || !$lowercase || !$special || !$number || strlen($password) < 8){ // check for uppercase, lowercase, special character, number, and 8 or more characters
@@ -90,13 +86,13 @@
         } elseif ($time == ""){ //check if birthdate has been entered
             ?>
             <script> alert ("Please enter birthdate.")
-                window.location.href='profileEdit.php';
+                window.location.href='profile.php';
             </script>
             <?php
         } elseif (getAge($birthdate) < 18){
             ?>
             <script> alert ("You must be 18 years of age or older to have an account.")
-                window.location.href='profileEdit.php';
+                window.location.href='profile.php';
             </script>
             <?php
         } else {
@@ -112,7 +108,7 @@
                     $query = "update Student set email=:newEmail, password=:newPassword, birthdate=:newBirthdate where username='$username'"; //update query of account
                     $step = $connect->prepare($query); //prepare statement to prevent SQL injection
                     $step->bindParam(':newEmail', $email);
-                    $step->bindParam(':newPassword', $password);
+                    $step->bindParam(':newPassword', $hashed_password);
                     $step->bindParam(':newBirthdate', $birthdate);
             
                     if($step->execute()) {
