@@ -5,12 +5,47 @@
 	<link rel = "stylesheet" href="style.css">
 </head>
 <body>
-	<section class="header">
-		<nav>
-			<!--Uses the logo to lead to their DashBoard since they are logged in.-->
-			<a href = "DashBoard.php"><img src="images/logo.png"></a>
-		</nav>
-	</section>
+	<style>
+		input { margin-bottom: 20px; }
+		
+		textarea { margin-bottom: 20px; }
+		
+		.container {
+			width: 100%;
+			box-sizing: border-box;
+			overflow: hidden;
+			margin-left: 15%;
+			position: absolute;
+			top: 25%;
+			left: 15%;
+			text-align: left;
+			border-style: solid;
+			border-width: 4px;
+			border-color: #EFEFEF;
+			display: inline-block;
+			background: #D5D5D5;
+			border-radius: 25px;
+		}
+		
+		.encapsulation {
+			position: relative;
+			left: 33%;
+		}
+		
+		.createEventHeader {
+			width: 100%;
+			text-align: center;
+			font-size: 24px;
+
+		}
+		
+		.customFormControl { width: 60%; }
+		
+		.InterestButton { margin: 5px; }
+		
+		.customDrop { }
+	</style>
+	
 	<?php
 		try {
 			$config = parse_ini_file("ProjectDB.ini"); // find database info in .ini file
@@ -22,6 +57,7 @@
 			die();
 		}
 	?>
+	
 	<!--Creates a table with 5 columns on the website.-->
 	<table border='1' width='1200' style='text-align:center' cellspacing='0'>
 		<tr>
@@ -45,7 +81,7 @@
 			if($result->rowCount() > 0) {
 				while($row = $result->fetch()) {
 					echo "<tr><td>". $row["name"]."</td><td>". $row["event_time"]."</td><td>". $row["event_date"]."</td><td>". 
-					$row["location"]."</td><td>". $row["description"]."</td></tr>";
+						$row["location"]."</td><td>". $row["description"]."</td></tr>";
 				}
 			}
 			
