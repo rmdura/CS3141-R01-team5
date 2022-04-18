@@ -72,33 +72,37 @@
 	
 	<!--Creates Joined Table On the Website.-->
 	<h1>Joined Events</h1>
-	<table>
-		<tr>
-			<th>Event</th>
-			<th>Time</th>
-			<th>Date</th>
-			<th>Location</th>
-			<th>Description</th>
-		</tr>
-		
-		<?php
-			// Populates Table from Database.
-			while($row=$joinResult->fetch())
-			{ ?>
-				<form action=LeaveEvent.php method=post>
-					<tr>
-						<!--FETCHING DATA FROM EACH ROW OF EVERY COLUMN-->
-						<td><?php echo $row['name'];?></td>
-						<td><?php echo $row['event_time'];?></td>
-						<td><?php echo $row['event_date'];?></td>
-						<td><?php echo $row['location'];?></td>
-						<td><?php echo $row['description'];?></td>
-						<td><button type="submit" name="leave" value=<?php print_r($row['event_index']);?>>Leave Event</button></td>
-					</tr>
-				</form>
-		<?php
-			} ?>
-	</table>
+		<?php if($joinResult->rowCount() > 0) { ?>
+<?php } else { ?>
+			<a href="JoinEvent.php>Join Now!</a>
+		<?php } ?>
+			<table>
+				<tr>
+					<th>Event</th>
+					<th>Time</th>
+					<th>Date</th>
+					<th>Location</th>
+					<th>Description</th>
+				</tr>
+				
+				<?php
+					// Populates Table from Database.
+					while($row=$joinResult->fetch())
+					{ ?>
+						<form action=LeaveEvent.php method=post>
+							<tr>
+								<!--FETCHING DATA FROM EACH ROW OF EVERY COLUMN-->
+								<td><?php echo $row['name'];?></td>
+								<td><?php echo $row['event_time'];?></td>
+								<td><?php echo $row['event_date'];?></td>
+								<td><?php echo $row['location'];?></td>
+								<td><?php echo $row['description'];?></td>
+								<td><button type="submit" name="leave" value=<?php print_r($row['event_index']);?>>Leave Event</button></td>
+							</tr>
+						</form>
+				<?php
+					} ?>
+			</table>
 	
 	<h1>Your Events</h1>
 	<table>
