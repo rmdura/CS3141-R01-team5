@@ -26,7 +26,7 @@
 			width: 100%;
 			box-sizing: border-box;
 			overflow: hidden;
-			margin-left: 15%;
+			margin-left: 5%;
 			position: absolute;
 			top: 25%;
 			left: 15%;
@@ -104,6 +104,7 @@
 						while($row = $result->fetch()) {
 							echo "<tr><td>". $row["name"]."</td><td>". $row["event_time"]."</td><td>". $row["event_date"]."</td><td>". 
 								$row["location"]."</td><td>". $row["description"]."</td></tr>";
+							<td><button type="submit" name="leave" value=<?php print_r($row['event_index']); ?>>Leave Event</button></td>
 						}
 					}
 					
@@ -120,6 +121,8 @@
 					}
 				?>
 			</table>
+			
+			<input type="submit" name="Submit" id="btn" value="Leave Event" class="submitButton" style="color: black;">
 		</div>
 	</section>
 </body>
