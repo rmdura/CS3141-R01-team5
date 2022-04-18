@@ -1,5 +1,6 @@
 <!--Sets Connection to Database.-->
 <?php
+	$user = $_COOKIE['username'];
 	try {
 		$config = parse_ini_file("ProjectDB.ini"); // find database info in .ini file
 		$dbh = new PDO($config['dsn'], $config['username'], $config['password']); // create connection to database
@@ -12,11 +13,11 @@
 	
 	// Pulls Joined Events Data From the database.
 	$joinSql = "SELECT event_index, name, event_time, event_date, location, description FROM Event 
-		WHERE event_index IN (SELECT event_id FROM Student_Event WHERE student_name='rmdura')";
+		WHERE event_index IN (SELECT event_id FROM Student_Event WHERE student_name='$user')";
 	$joinResult = $dbh->query($joinSql);
 	
 	// Pulls Owned Events Data From the Database.
-	$ownSql = "SELECT event_index, name, event_time, event_date, location, description FROM Event WHERE owner='pjellens'";
+	$ownSql = "SELECT event_index, name, event_time, event_date, location, description FROM Event WHERE owner='$user'";
 	$ownResult = $dbh->query($ownSql);	
 ?>
 
@@ -53,7 +54,7 @@
 			border: 1px solid black;
 		}
 		
-		th, td {
+		a, th, td {
 			font-weight: bold;
 			border: 1px solid black;
 			padding: 10px;
@@ -70,7 +71,7 @@
 	<?php include 'LeftFloatingNavBar.html'; ?>
 	
 	<!--Creates Joined Table On the Website.-->
-	<h1>Joined Event Information</h1>
+	<h1>Joined Events</h1>
 	<table>
 		<tr>
 			<th>Event</th>
@@ -84,20 +85,22 @@
 			// Populates Table from Database.
 			while($row=$joinResult->fetch())
 			{ ?>
-				<tr>
-					<!--FETCHING DATA FROM EACH ROW OF EVERY COLUMN-->
-					<td><?php echo $row['name'];?></td>
-					<td><?php echo $row['event_time'];?></td>
-					<td><?php echo $row['event_date'];?></td>
-					<td><?php echo $row['location'];?></td>
-					<td><?php echo $row['description'];?></td>
-					<td><button type="submit" name="leave" value=<?php print_r($row['event_index']);?>>Leave Event</button></td>
-				</tr>
+				<form action=LeaveEvent.php method=post>
+					<tr>
+						<!--FETCHING DATA FROM EACH ROW OF EVERY COLUMN-->
+						<td><?php echo $row['name'];?></td>
+						<td><?php echo $row['event_time'];?></td>
+						<td><?php echo $row['event_date'];?></td>
+						<td><?php echo $row['location'];?></td>
+						<td><?php echo $row['description'];?></td>
+						<td><button type="submit" name="leave" value=<?php print_r($row['event_index']);?>>Leave Event</button></td>
+					</tr>
+				</form>
 		<?php
 			} ?>
 	</table>
 	
-	<h1>Owned Event Information</h1>
+	<h1>Your Events</h1>
 	<table>
 		<tr>
 			<th>Event</th>
@@ -110,16 +113,18 @@
 		<?php
 			while($row=$ownResult->fetch())
 			{ ?>
-				<tr>
-					<!--FETCHING DATA FROM EACH ROW OF EVERY COLUMN-->
-					<td><?php echo $row['name'];?></td>
-					<td><?php echo $row['event_time'];?></td>
-					<td><?php echo $row['event_date'];?></td>
-					<td><?php echo $row['location'];?></td>
-					<td><?php echo $row['description'];?></td>
-					<td><button type="submit" name="delete" value="">Delete Event</button></td>
-					<td><button type="submit" name="edit" value="">Edit Event</button></td>
-				</tr>
+				<form action=CreateEvent.php method=post>
+					<tr>
+						<!--FETCHING DATA FROM EACH ROW OF EVERY COLUMN-->
+						<td><?php echo $row['name'];?></td>
+						<td><?php echo $row['event_time'];?></td>
+						<td><?php echo $row['event_date'];?></td>
+						<td><?php echo $row['location'];?></td>
+						<td><?php echo $row['description'];?></td>
+						<td><button type="submit" name="edit" value=<?php print_r($row['event_index']);?>>Edit Event</button></td>
+						<td><a href="DeleteEvent.php?event=<?php print_r($row['event_index']);?>">Delete Event</a></td>
+					</tr>
+				</form>
 		<?php
 			} ?>
 	</table>
