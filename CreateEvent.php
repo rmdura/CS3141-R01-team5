@@ -70,14 +70,14 @@
 	<section class="CreateEvent_Header">
 		<?php include 'LeftFloatingNavBar.html'; ?>
 		<div class="container">
-			<h3 class="createEventHeader">Create An Event</h3>
+			<h3 class="createEventHeader" id="PageHeader">Create An Event</h3>
 			<form id="CreateEventForm" action="CreateEvent_ServerPHP.php" method="post">
 				<input type="hidden" id="str" name="str" value="" />
-				<p class="InputIdentifier">*Title:</p><br /> <input type="text" name="newEventTitle" maxlength="50" required /><br />
-				<p class="InputIdentifier">*Date:</p><br /> <input type="date" id="datefield" name="newEventDate" min='1899-01-01' required /><br />
-				<p class="InputIdentifier">*Time:</p><br /> <input type="time" name="newEventTime" required /><br />
-				<p class="InputIdentifier">*Location:</p><br /> <input type="text" name="newEventLocation" maxlength="50" required /><br />
-				<p class="InputIdentifier">*Description:</p><br /> <textarea name="newEventDescription" maxlength="100" required></textarea><br />
+				<p class="InputIdentifier">*Title:</p><br /> <input type="text" name="newEventTitle" id="EventTitle" maxlength="50" value="<?php echo $name; ?>" required /><br />
+				<p class="InputIdentifier">*Date:</p><br /> <input type="date" id="datefield" name="newEventDate" min='1899-01-01' value="<?php echo $date; ?>" required /><br />
+				<p class="InputIdentifier">*Time:</p><br /> <input type="time" name="newEventTime" id="EventTime" value="<?php echo $time; ?>" required /><br />
+				<p class="InputIdentifier">*Location:</p><br /> <input type="text" name="newEventLocation" id="EventLocation" maxlength="50" value="<?php echo $location; ?>" required /><br />
+				<p class="InputIdentifier">*Description:</p><br /> <textarea name="newEventDescription" id="EventDescription" maxlength="100" value="<?php echo $description; ?>" required></textarea><br />
 				<p class="InputIdentifier">Interest Tags:</p><br />
 				<div class="dropdown customDrop">
 					<input type="text" name="newEventTag" class="form-control form-control-lg customFormControl" placeholder="Type Here..." id="newEventTag" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeyup="javascript:load_data(this.value)">
@@ -96,3 +96,22 @@
 
 </html>
 <script src="CreateEvent_Javascript.js"></script>
+
+<script>
+	var editFunc = <?php echo(json_encode($event_index)); ?>;
+	if (editFunc != NULL) {
+		document.getElementById("PageHeader").innerHTML = "Edit An Event";
+		document.getElementById("EventTitle").value = <?php echo(json_encode($name)); ?>;
+		document.getElementById("datefield").value = <?php echo(json_encode($date)); ?>;
+		document.getElementById("EventTime").value = <?php echo(json_encode($time)); ?>;
+		document.getElementById("EventLocation").value = <?php echo(json_encode($location)); ?>;
+		document.getElementById("EventDescription").value = <?php echo(json_encode($description)); ?>;
+		var tags = <?php echo(json_encode($tag_results)); ?>; // Gets tags from PHP pull from SQL
+		tags = tags.split(",") // Parse tags list
+		tags.foreach(element => { // For each tag, populate the newEventTag input value and add the interest to the list
+			document.getElementById("newEventTag").value = element;
+			AddInterest();
+		});
+		document.getElementById("newEventTag").value = ""; // clear newEventTag input
+	}
+</script>
