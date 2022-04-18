@@ -7,6 +7,8 @@
         <title>Account Settings</title>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
@@ -28,6 +30,7 @@
             .accountInfo, .searchInterestTags, .currentInterestTags {
                 padding: 15px;
                 font-size: 15px;
+                margin-right: 700px;
             }
             
             /*  Edit Account Infomation */
@@ -67,13 +70,13 @@
                 overflow: auto;
                 background-color: rgb(0,0,0);
                 background-color: rgba(0,0,0,0.5);
-                padding-top: 60px;
+                padding-top: 50px;
             }
 
             .cancel-btn {
                 width: auto;
                 margin-top: 20px;
-                margin-left: 140px;
+                margin-left: 105px;
                 text-align: center;
                 color: gray;
                 border: none;
@@ -139,11 +142,10 @@
                 background: #f44336;
                 transition: 0.75s;
             }
-
         </style>
 
         <div class="accountInfoHeader">
-            <h1>Account Infomation</h1>
+            <h3>Account Infomation</h3>
             <button onclick="document.getElementById('id03').style.display='block'" class="edit-btn">
                 <span class="button_icon">
                     <ion-icon name="pencil-outline"></ion-icon>
@@ -195,43 +197,77 @@
 
         <!-- Fetch the current user's account information -->
         <div class="accountInfo">
-            <h3>Username</h3>
+            <h5>Username</h5>
             <p><?php echo $username ?></p>
-            <h3>Email</h3>
+            <h5>Email</h5>
             <p><?php echo $email ?></p>
-            <h3>Birthday</h3>
+            <h5>Birthday</h5>
             <p><?php echo $birthdate ?></p>
         </div>
 
         <div class="interestTagsHeader">
-            <h1>Interest Tags</h1>
+            <h3>Interest Tags</h3>
         </div>
         
         <!-- Display of Current Interest Tags Assign to the User -->
         <div class="searchInterestTags">
             <!-- For Searching for New Interest tags -->
-            <h3>Search Interest Tags</h3>
+            <h5>Search Interest Tags</h5>
             <div class="dropdown customDrop">
                 <input type="text" name="newEventTag" class="form-control form-control-lg customFormControl" placeholder="Type Here..." id="newEventTag" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeyup="javascript:load_data(this.value)">
                 <span id="search_result"></span>
             </div>
-            <button type="button" class="InterestButton" onclick="AddInterest()">Add Tag</button>
+            <button onclick="ob_adRows.addRow()" class="edit-btn">Add Tag</button>
         </div>
 
         <div class="currentInterestTags">
-            <h3>Current Interest Tags</h3>
-            <table>
+            <h5>Current Interest Tags</h5>
+            <table id="table1">
                 <tbody>
                     <?php
                         foreach ($TAGS as $TAGS) {
                             echo'<tr>';
                             echo'<td>'.$TAGS['tagName'].'<td>';
+                            echo '<td><input type="button" value="Delete" onclick="ob_adRows.delRow(this)" /><td>';
                             echo'<tr>';
                         }
                     ?>
                 </tbody>
             </table>
         </div>
+
+        <script>
+            //JS class to add/delete rows in html table - https://coursesweb.net/javascript/ 
+            //receives table id
+            function adRowsTable(id) {
+                var table = document.getElementById(id);
+                var me = this;
+                if (document.getElementById(id)) {
+                    var row1 = table.rows[1].outerHTML;
+
+                    //adds index-id in cols with class .tbl_id
+                    function setIds() {
+                        var tbl_id = document.querySelectorAll('#' + id + ' .tbl_id');
+                        for (var i = 0; i < tbl_id.length; i++) tbl_id[i].innerHTML = i + 1;
+                    }
+
+                    //add row after clicked row; receives clicked button in row
+                    me.addRow = function (btn) {
+                        btn ? btn.parentNode.parentNode.insertAdjacentHTML('afterend', row1) : table.insertAdjacentHTML('beforeend', row1);
+                        setIds();
+                    }
+
+                    //delete clicked row; receives clicked button in row
+                    me.delRow = function (btn) {
+                        btn.parentNode.parentNode.outerHTML = '';
+                        setIds();
+                    }
+                }
+            }
+
+            //create object of adRowsTable(), pass the table id
+            var ob_adRows = new adRowsTable('table1');
+        </script>
 
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
