@@ -132,6 +132,11 @@
     }
 
     //Fetch the current user's interest tags
+    $results = $connect->query("select tag_name from Student_Tag where student_name='$currentUser'"); //select user's information
+    $TAGS = array();
+    while ($row = $results->fetch(PDO::FETCH_ASSOC)) {
+        $TAGS[] = array('tagName' => $row['tag_name']);
+    }
 
     //Edit and delete the current user's interest tags
 

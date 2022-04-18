@@ -25,7 +25,7 @@
                 display: flex;
             }
 
-            .accountInfo {
+            .accountInfo, .searchInterestTags, .currentInterestTags {
                 padding: 15px;
                 font-size: 15px;
             }
@@ -139,6 +139,7 @@
                 background: #f44336;
                 transition: 0.75s;
             }
+
         </style>
 
         <div class="accountInfoHeader">
@@ -194,19 +195,46 @@
 
         <!-- Fetch the current user's account information -->
         <div class="accountInfo">
-                <h3>Username</h3>
-                <p><?php echo $username ?></p>
-                <h3>Email</h3>
-                <p><?php echo $email ?></p>
-                <h3>Birthday</h3>
-                <p><?php echo $birthdate ?></p>
+            <h3>Username</h3>
+            <p><?php echo $username ?></p>
+            <h3>Email</h3>
+            <p><?php echo $email ?></p>
+            <h3>Birthday</h3>
+            <p><?php echo $birthdate ?></p>
         </div>
 
         <div class="interestTagsHeader">
             <h1>Interest Tags</h1>
         </div>
+        
+        <!-- Display of Current Interest Tags Assign to the User -->
+        <div class="searchInterestTags">
+            <!-- For Searching for New Interest tags -->
+            <h3>Search Interest Tags</h3>
+            <div class="dropdown customDrop">
+                <input type="text" name="newEventTag" class="form-control form-control-lg customFormControl" placeholder="Type Here..." id="newEventTag" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeyup="javascript:load_data(this.value)">
+                <span id="search_result"></span>
+            </div>
+            <button type="button" class="InterestButton" onclick="AddInterest()">Add Tag</button>
+        </div>
+
+        <div class="currentInterestTags">
+            <h3>Current Interest Tags</h3>
+            <table>
+                <tbody>
+                    <?php
+                        foreach ($TAGS as $TAGS) {
+                            echo'<tr>';
+                            echo'<td>'.$TAGS['tagName'].'<td>';
+                            echo'<tr>';
+                        }
+                    ?>
+                </tbody>
+            </table>
+        </div>
 
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        <script src="CreateEvent_Javascript.js"></script>
     </body>
 </html>
