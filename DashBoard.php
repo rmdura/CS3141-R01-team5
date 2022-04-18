@@ -49,12 +49,13 @@
 				'Calibri', Trebuchet MS', sans-serif';
 		}
 		
-		td {
+		.myDiv, h2, td {
 			background-color: #E4F5D4;
 			border: 1px solid black;
+			text-align: center;
 		}
 		
-		a, th, td {
+		.myDiv, th, td {
 			font-weight: bold;
 			border: 1px solid black;
 			padding: 10px;
@@ -71,66 +72,76 @@
 	<?php include 'LeftFloatingNavBar.html'; ?>
 	
 	<!--Creates Joined Table On the Website.-->
-	<h1>Joined Events</h1>
-		<?php if($joinResult->rowCount() > 0) { ?>
-<?php } else { ?>
-			<a href="JoinEvent.php>Join Now!</a>
-		<?php } ?>
-			<table>
-				<tr>
-					<th>Event</th>
-					<th>Time</th>
-					<th>Date</th>
-					<th>Location</th>
-					<th>Description</th>
-				</tr>
-				
-				<?php
-					// Populates Table from Database.
-					while($row=$joinResult->fetch())
-					{ ?>
-						<form action=LeaveEvent.php method=post>
-							<tr>
-								<!--FETCHING DATA FROM EACH ROW OF EVERY COLUMN-->
-								<td><?php echo $row['name'];?></td>
-								<td><?php echo $row['event_time'];?></td>
-								<td><?php echo $row['event_date'];?></td>
-								<td><?php echo $row['location'];?></td>
-								<td><?php echo $row['description'];?></td>
-								<td><button type="submit" name="leave" value=<?php print_r($row['event_index']);?>>Leave Event</button></td>
-							</tr>
-						</form>
-				<?php
-					} ?>
-			</table>
+	<h2>Joined Events</h2>
+	<?php if($joinResult->rowCount() > 0) { ?>
+		<table>
+			<tr>
+				<th>Event</th>
+				<th>Time</th>
+				<th>Date</th>
+				<th>Location</th>
+				<th>Description</th>
+			</tr>
+			
+			<?php
+				// Populates Table from Database.
+				while($row=$joinResult->fetch())
+				{ ?>
+					<form action=LeaveEvent.php method=post>
+						<tr>
+							<!--FETCHING DATA FROM EACH ROW OF EVERY COLUMN-->
+							<td><?php echo $row['name'];?></td>
+							<td><?php echo $row['event_time'];?></td>
+							<td><?php echo $row['event_date'];?></td>
+							<td><?php echo $row['location'];?></td>
+							<td><?php echo $row['description'];?></td>
+							<td><button type="submit" name="leave" value=<?php print_r($row['event_index']);?>>Leave Event</button></td>
+						</tr>
+					</form>
+			<?php
+				} ?>
+		</table>
+	<?php } else { ?>
+		<div class="myDiv">
+			<h1>Not part of an Event? </h1>
+			<a href="FindEvents.php">Join Now!</a>
+		</div>
+	<?php } ?>
 	
-	<h1>Your Events</h1>
-	<table>
-		<tr>
-			<th>Event</th>
-			<th>Time</th>
-			<th>Date</th>
-			<th>Location</th>
-			<th>Description</th>
-		</tr>
-		
-		<?php
-			while($row=$ownResult->fetch())
-			{ ?>
-				<form action=CreateEvent.php method=post>
-					<tr>
-						<!--FETCHING DATA FROM EACH ROW OF EVERY COLUMN-->
-						<td><?php echo $row['name'];?></td>
-						<td><?php echo $row['event_time'];?></td>
-						<td><?php echo $row['event_date'];?></td>
-						<td><?php echo $row['location'];?></td>
-						<td><?php echo $row['description'];?></td>
-						<td><button type="submit" name="edit" value=<?php print_r($row['event_index']);?>>Edit Event</button></td>
-						<td><a href="DeleteEvent.php?event=<?php print_r($row['event_index']);?>">Delete Event</a></td>
-					</tr>
-				</form>
-		<?php
-			} ?>
-	</table>
+	<h2>Your Events</h2>
+		<?php if($ownResult->rowCount() > 0) { ?>
+		<table>
+			<tr>
+				<th>Event</th>
+				<th>Time</th>
+				<th>Date</th>
+				<th>Location</th>
+				<th>Description</th>
+			</tr>
+			
+			<?php
+				while($row=$ownResult->fetch())
+				{ ?>
+					<form action=CreateEvent.php method=post>
+						<tr>
+							<!--FETCHING DATA FROM EACH ROW OF EVERY COLUMN-->
+							<td><?php echo $row['name'];?></td>
+							<td><?php echo $row['event_time'];?></td>
+							<td><?php echo $row['event_date'];?></td>
+							<td><?php echo $row['location'];?></td>
+							<td><?php echo $row['description'];?></td>
+							<td><button type="submit" name="edit" value=<?php print_r($row['event_index']);?>>Edit Event</button></td>
+							<td><a href="DeleteEvent.php?event=<?php print_r($row['event_index']);?>">Delete Event</a></td>
+						</tr>
+					</form>
+			<?php
+				} ?>
+		</table>
+		<?php } else { ?>
+			<div class="myDiv">
+				<h1>Not hosting an Event? </h1>
+				<a href="CreateEvent.php">Create An Event Now!</a>
+			</div>
+		<?php } ?>
 </body>
 </html>
