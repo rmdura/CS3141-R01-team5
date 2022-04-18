@@ -162,18 +162,18 @@ echo "<h3>Try to create student with email already in use (unique)</h3>";
 		$total++; 
 	}
 
-echo "<h3>Try to create student without birthdate (allowed)</h3>";
+echo "<h3>Try to create student without birthdate (cannot be null)</h3>";
 
-	echo '<p>Expected Result: Successful entry.</p> <br>';
+	echo '<p>Expected Result: Error thrown.</p> <br>';
 
 	try{
 		$testUser6 = $dbh->query("Insert into Student(username, email, password, birthdate) values('testUser4', 'test4@mtu.edu', 'pass', NULL)");
-		$successes++;
 		$total++; 
-		echo '<i style="color:green;font-family:calibri ;">Actual Result: Test student created successfully.</i> <br> ';
+		echo '<i style="color:red;font-family:calibri ;">Actual Result: Test student created successfully with null birthdate.</i> <br> ';
 	}catch (PDOException $e){
 		print $e->getMessage();
-		echo '<br> <i style="color:red;font-family:calibri ;">Actual Result: Error thrown.</i> <br> ';
+		echo '<br> <i style="color:green;font-family:calibri ;">Actual Result: Error thrown.</i> <br> ';
+		$successes++;
 		$total++; 
 	}
 
@@ -225,18 +225,18 @@ echo "<h3>Try to create event with owner not in Student table (foreign key)</h3>
 		$total++; 
 	}
 
-echo "<h3>Try to create student without owner (allowed)</h3>";
+echo "<h3>Try to create student without owner (cannot be null)</h3>";
 
 	echo '<p>Expected Result: Successful entry.</p> <br>';
 
 	try{
-		$testEvent4 = $dbh->query("Insert into Event(event_index, name, event_time, event_date, location, description, owner) values('400', 'testEvent4', '12:00:00', '2022-05-01', 'testLocation', 'Test Description', NULL)");
-		$successes++;		
+		$testEvent4 = $dbh->query("Insert into Event(event_index, name, event_time, event_date, location, description, owner) values('400', 'testEvent4', '12:00:00', '2022-05-01', 'testLocation', 'Test Description', NULL)");		
 		$total++; 
-		echo '<i style="color:green;font-family:calibri ;">Actual Result: Test event created successfully.</i> <br> ';
+		echo '<i style="color:red;font-family:calibri ;">Actual Result: Test event created successfully without owner.</i> <br> ';
 	}catch (PDOException $e){
 		print $e->getMessage();
-		echo '<br> <i style="color:red;font-family:calibri ;">Actual Result: Error thrown.</i> <br> ';
+		echo '<br> <i style="color:green;font-family:calibri ;">Actual Result: Error thrown.</i> <br> ';
+		$successes++;
 		$total++; 
 	}
 
