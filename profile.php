@@ -21,24 +21,17 @@
             }
 
             .accountInfoHeader, .interestTagsHeader {
-                font-size: 15px;
+                font-size: 10px;
                 display: flex;
-            }
-            button {
-                margin-left: 10px;
-            }
-
-            .editAccount {
-                position: relative;
             }
 
             .accountInfo {
                 padding: 15px;
-                font-size: 20px;
+                font-size: 15px;
             }
             
             /*  Edit Account Infomation */
-            .edit-btn{
+            .edit-btn {
                 display: inline-block;
                 text-decoration: none;
                 color: white;
@@ -50,7 +43,7 @@
                 cursor: pointer;
             }
 
-            .edit-btn::after{
+            .edit-btn::after {
                 content: '';
                 width: 0%;
                 height: 2px;
@@ -59,7 +52,7 @@
                 margin: auto;
                 transition: 0.5s;
             }
-            .edit-btn:hover::after{
+            .edit-btn:hover::after {
                 width: 100%;
             }
 
@@ -121,7 +114,7 @@
                 background: none;
             }
 
-            .newEmail, .newBirthdate, .newPassword, .currentPassword, .confirmNewPassword {
+            .newEmail, .newBirthdate, .newPassword, .currentPassword {
                 display: block;
                 border-radius: 5px;
                 border: 1px solid rgba(0, 0, 0, 0.2);
@@ -150,7 +143,11 @@
 
         <div class="accountInfoHeader">
             <h1>Account Infomation</h1>
-            <button onclick="document.getElementById('id03').style.display='block'" class="edit-btn">Edit Account</button>
+            <button onclick="document.getElementById('id03').style.display='block'" class="edit-btn">
+                <span class="button_icon">
+                    <ion-icon name="pencil-outline"></ion-icon>
+                </span>
+            </button>
         </div>
 
         <!-- Edit Account Infomation Button Section -->
@@ -175,29 +172,25 @@
                         <div class="newPassword">
                             <input type="password" placeholder="New Password" name = "newPassword">
                         </div>
-
-                        <div class="confirmNewPassword">
-                            <input type="password" placeholder="Confirm New Password" name = "confirmNewPassword">
-                        </div>
 		        </div>
                         <input type = "submit" name = "ok" value = "Edit Account" class ="editAccount-btn">
                     </form>
                     <button type="button" onclick="document.getElementById('id03').style.display='none'" class="cancel-btn">Cancel</button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <script>
-            // Get the modal
-            var offClick = document.getElementById('id03');
-            
-            // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function(event) {
-                if (event.target == offClick) {
-                    offClick.style.display = "none";
+            <script>
+                // Get the modal
+                var offClick = document.getElementById('id03');
+                
+                // When the user clicks anywhere outside of the modal, close it
+                window.onclick = function(event) {
+                    if (event.target == offClick) {
+                        offClick.style.display = "none";
+                    }
                 }
-            }
-        </script>
-    </section>
+            </script>
+        </section>
 
         <!-- Fetch the current user's account information -->
         <div class="accountInfo">
@@ -212,5 +205,8 @@
         <div class="interestTagsHeader">
             <h1>Interest Tags</h1>
         </div>
+
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     </body>
 </html>
