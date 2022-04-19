@@ -78,6 +78,7 @@
 			<h3 class="createEventHeader" id="PageHeader">Create An Event</h3>
 			<form id="CreateEventForm" action="CreateEvent_ServerPHP.php" method="post">
 				<input type="hidden" id="str" name="str" value="" />
+				<input type="hidden" id="editEventIndex" name="editEventIndex" value="" />
 				<p class="InputIdentifier">*Title:</p><br /> <input type="text" name="newEventTitle" id="EventTitle" maxlength="50" required /><br />
 				<p class="InputIdentifier">*Date:</p><br /> <input type="date" id="datefield" name="newEventDate" min='1899-01-01' required /><br />
 				<p class="InputIdentifier">*Time:</p><br /> <input type="time" name="newEventTime" id="EventTime" required /><br />
@@ -100,25 +101,31 @@
 </body>
 
 </html>
-<script src="CreateEvent_Javascript.js"></script>
+<script type="text/javascript" src="CreateEvent_Javascript.js"></script>
 
-<script>
-	var editFunc = "";
-	editFunc = <?php echo (json_encode($event_index)); ?>;
-	if (editFunc.length != 0) {
-		document.getElementById("PageHeader").innerHTML = "Edit An Event";
+<script type="text/javascript">
+	var indexForEditEvent = "";
+	indexForEditEvent = <?php echo (json_encode($event_index)); ?>; // Obtain value of index -- is only valid if this is an "Edit An Event"
+	if (indexForEditEvent.length != 0) {
+		// Change form values to those obtained from the database
 		document.getElementById("EventTitle").value = <?php echo (json_encode($name)); ?>;
 		document.getElementById("datefield").value = <?php echo (json_encode($date)); ?>;
 		document.getElementById("EventTime").value = <?php echo (json_encode($time)); ?>;
 		document.getElementById("EventLocation").value = <?php echo (json_encode($location)); ?>;
 		document.getElementById("EventDescription").innerHTML = <?php echo (json_encode($description)); ?>;
+		// Change page text to match the new page purpose
+		document.getElementById("PageHeader").innerHTML = "Edit An Event";
 		document.getElementById("btn").value = "Update Event";
+		// Maintain event index for when the event is updated
+		document.getElementById("editEventIndex").value = indexForEditEvent;
+		// Grab tag list from database and populate form with them
 		var tags = <?php echo (json_encode($tag_results)); ?>; // Gets tags from PHP pull from SQL
-		tags = tags.split(",") // Parse tags list
-		tags.foreach(element => { // For each tag, populate the newEventTag input value and add the interest to the list
-			document.getElementById("newEventTag").value = element;
+		tagsArray = tags.split(',') // Parse tags list
+		for (i = 0; i < tagsArray.length; i++) { // For each tag, populate the newEventTag input value and add the interest to the list
+			document.getElementsByName('newEventTag')[0].value = tagsArray[i];
+			setValidInterestTag(tagsArray[i]);
 			AddInterest();
-		});
-		document.getElementById("newEventTag").value = ""; // clear newEventTag input
+		}
+		document.getElementsByName('newEventTag')[0].value = ""; // clear newEventTag input
 	}
 </script>

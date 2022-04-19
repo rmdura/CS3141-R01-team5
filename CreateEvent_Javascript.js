@@ -1,13 +1,17 @@
 
-var validationVar; // variable to prevent non-database items entering the interest tag list
 
 /* --------------------------- */
+var validInterestTag; // variable to prevent non-database items entering the interest tag list
+
+function setValidInterestTag(str) {
+    validInterestTag = str;
+}
 /* Auto-fill text box with database item string when the user clicks on an item in the dropdown */
 function get_text(event) {
     var string = event.textContent;
 
     document.getElementsByName('newEventTag')[0].value = string;
-    validationVar = string;
+    setValidInterestTag(string);
 
     document.getElementById('search_result').innerHTML = '';
 }
@@ -58,8 +62,8 @@ var tag_array = new Array(); // Array to hold added interest tags
 
 function AddInterest() {
     var tagVal = document.getElementById("newEventTag").value;
-    var tagArray_CaseInsensitive = tag_array.map(element => { return element.toLowerCase();});
-    if (validationVar === tagVal && !tagArray_CaseInsensitive.includes(String(tagVal).toLowerCase())) {
+    var tagArray_CaseInsensitive = tag_array.map(element => { return element.toLowerCase(); });
+    if (validInterestTag === tagVal && !tagArray_CaseInsensitive.includes(String(tagVal).toLowerCase())) {
         tag_array.push(tagVal);
         PopulateList(tag_array);
     }
@@ -102,13 +106,13 @@ var mm = today.getMonth() + 1; //January is 0!
 var yyyy = today.getFullYear();
 
 if (dd < 10) {
-   dd = '0' + dd;
+    dd = '0' + dd;
 }
 
 if (mm < 10) {
-   mm = '0' + mm;
-} 
-    
+    mm = '0' + mm;
+}
+
 today = yyyy + '-' + mm + '-' + dd;
 document.getElementById("datefield").setAttribute("min", today);
 /* --------------------------- */
