@@ -135,14 +135,7 @@ if (isset($_POST["testUsername"]) && isset($_POST['testPassword']))
                 </form>
 		
 			<div class="options">
-                        <div class="remember-me">
-                            <input id="remember-me" type="checkbox">
-                            <label for="remember-me">Remember me?</label>
-                        </div>
-
-                        <div class="forgot-password">
-                            <a href="newPassword.php">Forget Password?</a>
-                        </div>
+                        
                     </div>
                     <div class="sign-up">
                         <button onclick="document.getElementById('id02').style.display='block'" class="signin-btn">New to College Socializing Platform?</button>

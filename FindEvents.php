@@ -1,14 +1,6 @@
-<!-- PHP code to establish connection -->
-<!-- with the localserver -->
 <?php
-
-// Information needed to access the database
-$config = parse_ini_file("ProjectDB.ini"); // find database info in .ini file
-$dbh = new PDO($config['dsn'], $config['username'], $config['password']); // create connection to database
-$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // error checking
-  
-// SQL query to select data from database
-$eventQuery = $dbh->query("SELECT event_index, description, event_date, event_time, location, name FROM Event");
+// Including the database connection:
+include 'FindEventsdb.php';
 ?>
 
 <!-- HTML code to display -->
@@ -27,27 +19,48 @@ $eventQuery = $dbh->query("SELECT event_index, description, event_date, event_ti
 
     <!-- CSS for styling the table -->
     <style>
+        .wholePage {
+            background-image: url(images/mainWebBG.png);
+        }
+
+        .findEvents {
+            color: #FFFFFF;
+        }
+
+        .bodyInfo {
+            margin-left: 15%;
+            margin-top: 2%;
+            margin-right: 2%;
+        }
+
+        .dropdown {
+            color: #FFFFFF;
+            margin-right: 50%
+        }
+
         table {
             margin: 0 auto;
             font-size: large;
             border: 1px solid black;
         }
-  
+        
         h1 {
+            padding: 20px;
             text-align: center;
-            color: #006600;
+            color: #FFFFFF;
             font-size: xx-large;
             font-family: 'Gill Sans', 'Gill Sans MT', 
             ' Calibri', 'Trebuchet MS', 'sans-serif';
         }
   
         td {
-            background-color: #E4F5D4;
             border: 1px solid black;
         }
   
         th,
         td {
+            color: #FFFFFF;
+            background-color: #555555;
             font-weight: bold;
             border: 1px solid black;
             padding: 10px;
@@ -65,17 +78,20 @@ $eventQuery = $dbh->query("SELECT event_index, description, event_date, event_ti
 session_start();
 ?>
 
-<body>
+<body class="wholePage">
+<div class="bodyInfo">
 <?php include 'LeftFloatingNavBar.html'; ?>
 
-    <h3>Find Events Page</h3>
+    <h3 class="findEvents">Find Events Page</h3>
 
     <!-- Creating search bar and it's button -->
     <div class="dropdown">
 		Find Event: <input type="text" name="newEventTag" class="form-control form-control-lg" placeholder="Type Here..." id="newEventTag" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeyup="javascript:load_data(this.value)"/>
 		<span id="search_result"></span>
 	</div>
-    <input type = "submit" name = "Submit" id="btn" value = "Search Events">
+    <div class="searchButton">
+        <input type = "submit" name = "Submit" id="btn" value = "Search Events">
+    </div>
 
     <!-- Adding table with event information -->
     <section>
@@ -84,7 +100,7 @@ session_start();
         <!-- TABLE CONSTRUCTION-->
         <table>
             <tr>
-		<th>name:</th>
+		        <th>name:</th>
                 <th>description:</th>
                 <th>event date:</th>
                 <th>event time:</th>
@@ -100,7 +116,7 @@ session_start();
             <form action=JoinEvent.php method=post>
                 <tr>
                     <!--FETCHING DATA FROM EACH ROW OF EVERY COLUMN-->
-		    <td><?php echo $rows['name'];?></td>
+		            <td><?php echo $rows['name'];?></td>
                     <td><?php echo $rows['description'];?></td>
                     <td><?php echo $rows['event_date'];?></td>
                     <td><?php echo $rows['event_time'];?></td>
@@ -113,6 +129,7 @@ session_start();
              ?>
         </table>
     </section>
+</div>
 </body>
 
 </html>

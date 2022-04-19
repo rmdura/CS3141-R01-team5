@@ -1,5 +1,7 @@
+
 var validationVar; // variable to prevent non-database items entering the interest tag list
 
+/* --------------------------- */
 /* Auto-fill text box with database item string when the user clicks on an item in the dropdown */
 function get_text(event) {
     var string = event.textContent;
@@ -48,7 +50,10 @@ function load_data(query) {
         document.getElementById('search_result').innerHTML = '';
     }
 }
+/* --------------------------- */
 
+
+/* --------------------------- */
 var tag_array = new Array(); // Array to hold added interest tags
 
 function AddInterest() {
@@ -86,8 +91,10 @@ function Delitem(index) {
     tag_array.splice(index, 1);
     PopulateList(tag_array);
 }
+/* --------------------------- */
 
 
+/* --------------------------- */
 // Captures today's date for the date field to create an event. Ensures a user cannot create an event for a date in the past.
 var today = new Date();
 var dd = today.getDate();
@@ -104,3 +111,8 @@ if (mm < 10) {
     
 today = yyyy + '-' + mm + '-' + dd;
 document.getElementById("datefield").setAttribute("min", today);
+/* --------------------------- */
+
+
+/* --------------------------- */
+/* --------------------------- */
