@@ -1,5 +1,6 @@
 <!--Sets Connection to Database.-->
 <?php
+	include 'LoginCheck.php';
 	$user = $_COOKIE['username'];
 	try {
 		$config = parse_ini_file("ProjectDB.ini"); // find database info in .ini file
