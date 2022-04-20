@@ -139,6 +139,11 @@
     }
 
     //Edit and delete the current user's interest tags
+    if (isset($_POST['deleteInterest'])) {
+        echo $username;
+        $statement = $connect->prepare("delete from Student_Tag where tag_name='Indie Rock';"); //update query of interest tags
+        $statement->execute();
+    }
 
     //end profile session
     if(!isset($currentUser)) {

@@ -19,7 +19,11 @@
                 margin-left: 200px;
                 padding: 40px;
                 color: white;
-                background: #1c1b22;
+                background-image: url(images/mainWebBG.png);
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-position: center;
+                background-size: cover;
             }
 
             .accountInfoHeader, .interestTagsHeader {
@@ -222,24 +226,26 @@
 
         <div class="currentInterestTags">
             <h5>Current Interest Tags</h5>
-            <table id="table1">
-                <tbody>
-                    <?php
-                        foreach ($TAGS as $TAGS) {
-                            echo'<tr>';
-                            echo'<td>'.$TAGS['tagName'].'<td>';
-                            echo '<td><input type="button" value="Delete" onclick="ob_adRows.delRow(this)" /><td>';
-                            echo'<tr>';
-                        }
-                    ?>
-                </tbody>
-            </table>
+            <form method = "post" >
+                <table id="table1">
+                    <tbody>
+                        <?php
+                            foreach ($TAGS as $TAGS) {
+                                echo'<tr>';
+                                echo'<td>'.$TAGS['tagName'].'<td>';
+                                echo '<td><input type="submit" value="x" onclick="ob_addRows.delRow(this)" class="edit-btn" name = "deleteInterest" /><td>';
+                                echo'<tr>';
+                            }
+                        ?>
+                    </tbody>
+                </table>
+            </form>
         </div>
 
         <script>
             //JS class to add/delete rows in html table - https://coursesweb.net/javascript/ 
             //receives table id
-            function adRowsTable(id) {
+            function addRowsTable(id) {
                 var table = document.getElementById(id);
                 var me = this;
                 if (document.getElementById(id)) {
@@ -266,7 +272,7 @@
             }
 
             //create object of adRowsTable(), pass the table id
-            var ob_adRows = new adRowsTable('table1');
+            var ob_addRows = new addRowsTable('table1');
         </script>
 
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
