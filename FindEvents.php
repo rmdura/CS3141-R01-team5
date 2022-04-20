@@ -89,7 +89,7 @@ session_start();
 
         <h3 class="findEvents">Find Events Page</h3>
 
-        <form aciton=FindEventsdb.php method=post>
+        <form aciton=FindEvents.php method=post>
             <!-- Creating search bar and it's button -->
             <div class="dropdown">
                 Find Event: <input type="text" name="newEventTag" class="form-control form-control-lg" placeholder="Type Here..." id="findEventString" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeyup="javascript:load_data(this.value)" />
@@ -107,19 +107,18 @@ session_start();
             <!-- TABLE CONSTRUCTION-->
             <table>
                 <tr>
-                    <th>name:</th>
-                    <th>description:</th>
-                    <th>event date:</th>
-                    <th>event time:</th>
-                    <th>location:</th>
-                    <th>join event:</th>
+                    <th>name</th>
+                    <th>description</th>
+                    <th>event date</th>
+                    <th>event time</th>
+                    <th>location</th>
+                    <th>join event</th>
                 </tr>
-
                 <!-- PHP CODE TO FETCH DATA FROM ROWS-->
                 <?php   // LOOP TILL END OF DATA 
                 while ($rows = $eventQuery->fetch()) {
                 ?>
-                    <form action=JoinEvent.php method=post>
+                    <form action=JoinEvent.php method=post id=tableForm>
                         <tr>
                             <!--FETCHING DATA FROM EACH ROW OF EVERY COLUMN-->
                             <td><?php echo $rows['name']; ?></td>
