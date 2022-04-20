@@ -17,11 +17,15 @@ include 'FindEventsdb.php';
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 
-    <!-- CSS for styling the table -->
+    <!-- CSS for styling the table and page -->
     <style>
-        .wholePage {
-            background-image: url(images/mainWebBG.png);
-        }
+        body {
+			background-image: url(images/mainWebBG.png);
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-position: center;
+			background-size: cover;
+		}
 
         .findEvents {
             color: #FFFFFF;
@@ -78,7 +82,7 @@ include 'FindEventsdb.php';
 session_start();
 ?>
 
-<body class="wholePage">
+<body>
 <div class="bodyInfo">
 <?php include 'LeftFloatingNavBar.html'; ?>
 

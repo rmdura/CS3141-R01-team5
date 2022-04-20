@@ -38,7 +38,7 @@ if (isset($_POST['newEventTitle']) && isset($_POST['newEventDate']) && isset($_P
 	$tag_data = $_POST['str']; // string of interest tags from html form
 	$tags = explode(",", $tag_data); // explode string by comma (creates array)
 
-	if (isset($_POST['editEventIndex'])) { // Is an Edit -- Update existing event
+	if (!empty($_POST['editEventIndex'])) { // Is an Edit -- Update existing event
 		try {
 			$event_index = $_POST['editEventIndex'];
 			// Enter data into Event table	
