@@ -26,7 +26,7 @@ if (isset($_POST['edit'])) { // True if the page was navigated to by the "Edit" 
 	$tag_results = implode(",", $tag_query); // implode array by comma (creates string)
 }
 // Below is for when the form is submitted
-if (isset($_POST['newEventTitle']) && isset($_POST['newEventDate']) && isset($_POST['newEventTime']) && isset($_POST['newEventLocation']) && isset($_POST['newEventDescription']) && isset($_POST['Submit'])) {
+if (!empty($_POST['newEventTitle']) && !empty($_POST['newEventDate']) && !empty($_POST['newEventTime']) && !empty($_POST['newEventLocation']) && !empty($_POST['newEventDescription']) && isset($_POST['Submit'])) {
 	$name = $_POST["newEventTitle"]; // Event title
 	$time = strtotime($_POST['newEventDate']); //convert date in html form to sql date format
 	$event_date = date('Y-m-d', $time); // store date

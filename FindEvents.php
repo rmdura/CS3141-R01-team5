@@ -102,17 +102,17 @@ session_start();
 
         <!-- Adding table with event information -->
         <section>
-            <h1>Event information</h1>
+            <h1>Event Information</h1>
 
             <!-- TABLE CONSTRUCTION-->
             <table>
                 <tr>
-                    <th>name</th>
-                    <th>description</th>
-                    <th>event date</th>
-                    <th>event time</th>
-                    <th>location</th>
-                    <th>join event</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Event Date</th>
+                    <th>Event Time</th>
+                    <th>Location</th>
+                    <th>Join Event</th>
                 </tr>
                 <!-- PHP CODE TO FETCH DATA FROM ROWS-->
                 <?php   // LOOP TILL END OF DATA 
