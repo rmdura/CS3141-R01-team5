@@ -34,41 +34,112 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 	
-	<style>
-		table {
-			margin: 0 auto;
-			font-size: large;
-			border: 1px solid black;
-		}
-		
-		h1 {
-			text-align: center;
-			color: #006600;
-			font-size: xx-large;
-			font-family: 'Gill Sans', 'Gill Sans MT',
-				'Calibri', Trebuchet MS', sans-serif';
-		}
-		
-		.myDiv, td {
-			background-color: #E4F5D4;
-			border: 1px solid black;
-			text-align: center;
-		}
-		
-		.myDiv, th, td {
-			font-weight: bold;
-			border: 1px solid black;
-			padding: 10px;
-			text-align: center;
-		}
-		
-		td {
-			font-weight: lighter;
-		}
-	</style>
+	<!-- CSS for styling the table and page -->
+    <style>
+        body {
+            background-image: url(images/mainWebBG.png);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .findEvents {
+            color: #FFFFFF;
+        }
+
+        .bodyInfo {
+            margin-left: 15%;
+            margin-top: 2%;
+            margin-right: 2%;
+        }
+
+        .dropdown {
+            color: #FFFFFF;
+            margin-right: 50%
+        }
+
+        table {
+            margin: 0 auto;
+            font-size: large;
+            border: 1px solid black;
+        }
+
+        h1 {
+            padding: 20px;
+            text-align: center;
+            color: #FFFFFF;
+            font-size: xx-large;
+            font-family: 'Gill Sans', 'Gill Sans MT',
+                ' Calibri', 'Trebuchet MS', 'sans-serif';
+        }
+
+	h2 {
+		padding: 20px;
+            text-align: center;
+            color: #FFFFFF;
+            font-size: x-large;
+            font-family: 'Gill Sans', 'Gill Sans MT',
+                ' Calibri', 'Trebuchet MS', 'sans-serif';
+        }
+
+	.eventNav {
+			padding: 20px;
+            text-align: center;
+            color: #FFFFFF;
+            font-size: medium;
+            font-family: 'Gill Sans', 'Gill Sans MT',
+                ' Calibri', 'Trebuchet MS', 'sans-serif';
+	}
+
+	a:link {
+  		color: white;
+  		background-color: transparent;
+  		text-decoration: none;
+	}
+
+	a:visited {
+ 		color: white;
+  		background-color: transparent;
+  		text-decoration: none;
+	}
+
+	a:hover {
+  		color: gold;
+  		background-color: transparent;
+  		text-decoration: none;
+	}
+
+	a:active {
+  		color: white;
+  		background-color: transparent;
+  		text-decoration: underline;
+	}
+
+	}
+
+        td {
+            border: 1px solid black;
+        }
+
+        th,
+        td {
+            color: #FFFFFF;
+            background-color: #555555;
+            font-weight: bold;
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+
+        td {
+            font-weight: lighter;
+        }
+    </style>
 </head>
 
 <body>
+<div class="bodyInfo">
 	<?php include 'LeftFloatingNavBar.html'; ?>
 	
 	<!--Creates Joined Table On the Website.-->
@@ -81,6 +152,7 @@
 				<th>Date</th>
 				<th>Location</th>
 				<th>Description</th>
+				<th>Leave Event</th>
 			</tr>
 			
 			<?php
@@ -95,16 +167,16 @@
 							<td><?php echo $row['event_date'];?></td>
 							<td><?php echo $row['location'];?></td>
 							<td><?php echo $row['description'];?></td>
-							<td><button type="submit" name="leave" value=<?php print_r($row['event_index']);?>>Leave Event</button></td>
+							<td><button style="padding: 3px; background: white;color: black;font-weight: 500;border-style: groove;border: 1px black;" type="submit" name="leave" value=<?php print_r($row['event_index']);?>>Leave</button></td>
 						</tr>
 					</form>
 			<?php
 				} ?>
 		</table>
 	<?php } else { ?>
-		<div class="myDiv">
 			<h2>Not part of an Event?</h2>
-			<a href="FindEvents.php">Join Now!</a>
+		<div class="eventNav">
+			<a style="padding: 10px; border: 2px solid gold;background: black;" href="FindEvents.php">Join an Event Now!</a>
 		</div>
 	<?php } ?>
 	
@@ -117,6 +189,8 @@
 				<th>Date</th>
 				<th>Location</th>
 				<th>Description</th>
+				<th>Edit Event</th>
+				<th>Delete Event</th>
 			</tr>
 			
 			<?php
@@ -130,18 +204,19 @@
 							<td><?php echo $row['event_date'];?></td>
 							<td><?php echo $row['location'];?></td>
 							<td><?php echo $row['description'];?></td>
-							<td><button type="submit" name="edit" value=<?php print_r($row['event_index']);?>>Edit Event</button></td>
-							<td><a href="DeleteEvent.php?event=<?php print_r($row['event_index']);?>">Delete Event</a></td>
+							<td><button style="padding: 3px; background: white;color: black;font-weight: 500;border-style: groove;border: 1px black;" type="submit" name="edit" value=<?php print_r($row['event_index']);?>>Edit</button></td>
+							<td><a style="padding: 3px; background: white;color: black;font-weight: 500;border-style: groove;border: 1px black;" href="DeleteEvent.php?event=<?php print_r($row['event_index']);?>">Delete</a></td>
 						</tr>
 					</form>
 			<?php
 				} ?>
 		</table>
 		<?php } else { ?>
-			<div class="myDiv">
 				<h2>Not hosting an Event?</h2>
-				<a href="CreateEvent.php">Create An Event Now!</a>
+			<div class="eventNav">
+				<a style="padding: 10px; border: 2px solid gold ;background: black;" href="CreateEvent.php">Create An Event Now!</a>
 			</div>
 		<?php } ?>
+</div>
 </body>
 </html>
