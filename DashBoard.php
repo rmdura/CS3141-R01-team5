@@ -49,7 +49,7 @@
 				'Calibri', Trebuchet MS', sans-serif';
 		}
 		
-		.myDiv, h2, td {
+		.myDiv, td {
 			background-color: #E4F5D4;
 			border: 1px solid black;
 			text-align: center;
@@ -72,7 +72,7 @@
 	<?php include 'LeftFloatingNavBar.html'; ?>
 	
 	<!--Creates Joined Table On the Website.-->
-	<h2>Joined Events</h2>
+	<h1>Joined Events</h1>
 	<?php if($joinResult->rowCount() > 0) { ?>
 		<table>
 			<tr>
@@ -103,12 +103,12 @@
 		</table>
 	<?php } else { ?>
 		<div class="myDiv">
-			<h1>Not part of an Event? </h1>
+			<h2>Not part of an Event?</h2>
 			<a href="FindEvents.php">Join Now!</a>
 		</div>
 	<?php } ?>
 	
-	<h2>Your Events</h2>
+	<h1>Your Events</h1>
 		<?php if($ownResult->rowCount() > 0) { ?>
 		<table>
 			<tr>
@@ -139,7 +139,7 @@
 		</table>
 		<?php } else { ?>
 			<div class="myDiv">
-				<h1>Not hosting an Event? </h1>
+				<h2>Not hosting an Event?</h2>
 				<a href="CreateEvent.php">Create An Event Now!</a>
 			</div>
 		<?php } ?>
