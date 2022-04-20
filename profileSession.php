@@ -197,15 +197,26 @@
     }
 
     //Edit and delete the current user's interest tags
-    // SQL query with given input
-    if (!empty(($_POST["newInterest"]))) {
-        $condition = preg_replace('/[^A-Za-z0-9\- ]/', '', $_POST["newInterest"]);
-        $interests = $connect->query("insert into Student_Tag(student_name, tag_name) values('$currentUser', '%".$condition."%')");
+    if (!empty(($_POST["newEventTag"]))) {
+        $condition = preg_replace('/[^A-Za-z0-9\- ]/', '', $_POST["newEventTag"]);
+        $interests = $connect->prepare("insert into Student_Tag(student_name, tag_name) values('$currentUser', '%".$condition."%')");
+        $interests->execute();
+        ?>
+        <script> alert ("Interest tag successfully added!")
+            window.location.href='profile.php';
+        </script>
+        <?php
     }
 
     if (isset($_POST['deleteInterest'])) {
-        $statement = $connect->prepare("delete from Student_Tag where tag_name='Indie Rock';"); //update query of interest tags
-        $statement->execute();
+        $currentTag = $_Post['tag_name'];
+        $interests = $connect->prepare("delete from Student_Tag where student_name='$currentUser' and tag_name='$currentTag';"); //update query of interest tags
+        $interests->execute();
+        ?>
+        <script> alert ("Interest tag successfully deleted!")
+            window.location.href='profile.php';
+        </script>
+        <?php
     }
 
     //end profile session

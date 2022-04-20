@@ -265,11 +265,13 @@
             <!-- For Searching for New Interest tags -->
             <h5>Search Interest Tags</h5>
             <form method=post>
-                <div class="dropdown">
-                    <input type="text" name="newInterest" class="form-control form-control-lg" placeholder="Type Here..." id="addInterest" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeyup="javascript:load_data(this.value)">
+                <div class="dropdown customDrop">
+                    <input type="text" name="newEventTag" class="form-control form-control-lg customFormControl" placeholder="Type Here..." id="findEventString" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeyup="javascript:load_data(this.value)">
                     <span id="search_result"></span>
                 </div>
-                <input type="submit" onclick="ob_adRows.addRow()" class="edit-btn">Add Tag</button>
+                <div class="searchButton">
+                    <input type="submit" name="Submit" id="btn" value="Add Tags">
+                </div>
             </form>
         </div>
 
@@ -282,7 +284,7 @@
                             foreach ($TAGS as $TAGS) {
                                 echo'<tr>';
                                 echo'<td>'.$TAGS['tagName'].'<td>';
-                                echo '<td><input type="submit" value="x" onclick="ob_addRows.delRow(this)" class="edit-btn" name = "deleteInterest" /><td>';
+                                echo '<td><input type="submit" value="x" class="edit-btn" name = "deleteInterest" /><td>';
                                 echo'<tr>';
                             }
                         ?>
@@ -290,39 +292,6 @@
                 </table>
             </form>
         </div>
-
-        <script>
-            //JS class to add/delete rows in html table - https://coursesweb.net/javascript/ 
-            //receives table id
-            function addRowsTable(id) {
-                var table = document.getElementById(id);
-                var me = this;
-                if (document.getElementById(id)) {
-                    var row1 = table.rows[1].outerHTML;
-
-                    //adds index-id in cols with class .tbl_id
-                    function setIds() {
-                        var tbl_id = document.querySelectorAll('#' + id + ' .tbl_id');
-                        for (var i = 0; i < tbl_id.length; i++) tbl_id[i].innerHTML = i + 1;
-                    }
-
-                    //add row after clicked row; receives clicked button in row
-                    me.addRow = function (btn) {
-                        btn ? btn.parentNode.parentNode.insertAdjacentHTML('afterend', row1) : table.insertAdjacentHTML('beforeend', row1);
-                        setIds();
-                    }
-
-                    //delete clicked row; receives clicked button in row
-                    me.delRow = function (btn) {
-                        btn.parentNode.parentNode.outerHTML = '';
-                        setIds();
-                    }
-                }
-            }
-
-            //create object of adRowsTable(), pass the table id
-            var ob_addRows = new addRowsTable('table1');
-        </script>
 
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
