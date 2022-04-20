@@ -1,5 +1,6 @@
 <?php
 // Including the database connection:
+include 'LoginCheck.php';
 include 'FindEventsdb.php';
 ?>
 
