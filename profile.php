@@ -28,6 +28,9 @@
 
             .accountInfoHeader, .interestTagsHeader {
                 font-size: 10px;
+            }
+
+            .accountInfoEdits {
                 display: flex;
             }
 
@@ -43,7 +46,7 @@
                 text-decoration: none;
                 color: white;
                 border: transparent;
-                padding: 5px 15px;
+                padding: 5px;
                 font-size: 13px;
                 background: transparent;
                 position: relative;
@@ -150,14 +153,9 @@
 
         <div class="accountInfoHeader">
             <h3>Account Infomation</h3>
-            <button onclick="document.getElementById('id03').style.display='block'" class="edit-btn">
-                <span class="button_icon">
-                    <ion-icon name="pencil-outline"></ion-icon>
-                </span>
-            </button>
         </div>
 
-        <!-- Edit Account Infomation Button Section -->
+        <!-- Edit Email Infomation Button Section -->
         <section>
         <div id="id03" class="modal">
             <div class="edit-div">
@@ -171,9 +169,47 @@
                         <div class="newEmail">
                             <input type="text" placeholder="New Email" name = "newEmail">
                         </div>
+		        </div>
+                        <input type = "submit" name = "ok" value = "Edit Account" class ="editAccount-btn">
+                    </form>
+                    <button type="button" onclick="document.getElementById('id03').style.display='none'" class="cancel-btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Edit Birthdate Infomation Button Section -->
+        <section>
+        <div id="id04" class="modal">
+            <div class="edit-div">
+                <div class="title">Edit Account Form</div>
+                <div class="form">
+                    <form method = "post" >
+                        <div class="currentPassword">
+                            <input type="password" placeholder="Current Password" name = "confirmPassword">
+                        </div>
 
                         <div class="newBirthdate">
                             <input placeholder = "New Birthdate" class = "textbox-n" type = "text" onfocus = "(this.type = 'date')"  id = "date" name = "newBirthdate">
+                        </div>
+		        </div>
+                        <input type = "submit" name = "ok" value = "Edit Account" class ="editAccount-btn">
+                    </form>
+                    <button type="button" onclick="document.getElementById('id04').style.display='none'" class="cancel-btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Edit Password Infomation Button Section -->
+        <section>
+        <div id="id05" class="modal">
+            <div class="edit-div">
+                <div class="title">Edit Account Form</div>
+                <div class="form">
+                    <form method = "post" >
+                        <div class="currentPassword">
+                            <input type="password" placeholder="Current Password" name = "confirmPassword">
                         </div>
 
                         <div class="newPassword">
@@ -182,31 +218,42 @@
 		        </div>
                         <input type = "submit" name = "ok" value = "Edit Account" class ="editAccount-btn">
                     </form>
-                    <button type="button" onclick="document.getElementById('id03').style.display='none'" class="cancel-btn">Cancel</button>
+                    <button type="button" onclick="document.getElementById('id05').style.display='none'" class="cancel-btn">Cancel</button>
                     </div>
                 </div>
             </div>
-            <script>
-                // Get the modal
-                var offClick = document.getElementById('id03');
-                
-                // When the user clicks anywhere outside of the modal, close it
-                window.onclick = function(event) {
-                    if (event.target == offClick) {
-                        offClick.style.display = "none";
-                    }
-                }
-            </script>
         </section>
 
         <!-- Fetch the current user's account information -->
         <div class="accountInfo">
             <h5>Username</h5>
             <p><?php echo $username ?></p>
-            <h5>Email</h5>
+            <div class="accountInfoEdits">
+                <h5>Email</h5>
+                <button onclick="document.getElementById('id03').style.display='block'" class="edit-btn">
+                    <span class="button_icon">
+                        <ion-icon name="pencil-outline"></ion-icon>
+                    </span>
+                </button>
+            </div>
             <p><?php echo $email ?></p>
-            <h5>Birthday</h5>
+            <div class="accountInfoEdits">
+                <h5>Birthdate</h5>
+                <button onclick="document.getElementById('id04').style.display='block'" class="edit-btn">
+                    <span class="button_icon">
+                        <ion-icon name="pencil-outline"></ion-icon>
+                    </span>
+                </button>
+            </div>
             <p><?php echo $birthdate ?></p>
+            <div class="accountInfoEdits">
+                <h5>Password</h5>
+                <button onclick="document.getElementById('id05').style.display='block'" class="edit-btn">
+                    <span class="button_icon">
+                        <ion-icon name="pencil-outline"></ion-icon>
+                    </span>
+                </button>
+            </div>
         </div>
 
         <div class="interestTagsHeader">
@@ -217,11 +264,13 @@
         <div class="searchInterestTags">
             <!-- For Searching for New Interest tags -->
             <h5>Search Interest Tags</h5>
-            <div class="dropdown customDrop">
-                <input type="text" name="newEventTag" class="form-control form-control-lg customFormControl" placeholder="Type Here..." id="newEventTag" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeyup="javascript:load_data(this.value)">
-                <span id="search_result"></span>
-            </div>
-            <button onclick="ob_adRows.addRow()" class="edit-btn">Add Tag</button>
+            <form method=post>
+                <div class="dropdown">
+                    <input type="text" name="newInterest" class="form-control form-control-lg" placeholder="Type Here..." id="addInterest" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeyup="javascript:load_data(this.value)">
+                    <span id="search_result"></span>
+                </div>
+                <input type="submit" onclick="ob_adRows.addRow()" class="edit-btn">Add Tag</button>
+            </form>
         </div>
 
         <div class="currentInterestTags">
