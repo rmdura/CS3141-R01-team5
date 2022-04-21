@@ -34,8 +34,8 @@ include 'FindEventsdb.php';
         }
 
         .bodyInfo {
-            margin-left: 15%;
-            margin-top: 2%;
+            margin-left: 11%;
+            margin-top: 2.2%;
             margin-right: 2%;
         }
 
@@ -88,7 +88,7 @@ session_start();
     <div class="bodyInfo">
         <?php include 'LeftFloatingNavBar.html'; ?>
 
-        <h3 class="findEvents">Find Events Page</h3>
+        <h3 class="findEvents">Find An Event</h3>
 
         <form aciton=FindEvents.php method=post>
             <!-- Creating search bar and it's button -->
