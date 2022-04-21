@@ -16,7 +16,7 @@
         <?php include 'LeftFloatingNavBar.html'; ?>
         <style>
             body {
-                margin-left: 200px;
+                margin-left: 10%;
                 padding: 40px;
                 color: white;
                 background-image: url(images/mainWebBG.png);
@@ -37,7 +37,7 @@
             .accountInfo, .searchInterestTags, .currentInterestTags {
                 padding: 15px;
                 font-size: 15px;
-                margin-right: 700px;
+                margin-right: 50%;
             }
             
             /*  Edit Account Infomation */
