@@ -75,7 +75,7 @@ function PopulateList(arr) {
 
     text = "<ol>";
     for (i = 0; i < LLen; i++) {
-        text += "<li>" + arr[i] + "<input type='button' onclick='Delitem(" + i + ")' value='Delete' /></li>";
+        text += "<li>" + arr[i] + "     <input type='button' style='padding: 2px;' onclick='Delitem(" + i + ")' value='Remove' /></li>";
 
     }
     text += "</ol>";

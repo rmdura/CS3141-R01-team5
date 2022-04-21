@@ -25,80 +25,63 @@
 			background-position: center;
 			background-size: cover;
 		}
-
-		.CreateEvent_Header {
-			min-height: 100vh;
+		.container {
 			width: 100%;
+			overflow: hidden;
+			margin-left: 10%;
 			position: absolute;
+			text-align: left;
 		}
 
 		.InputIdentifier {
 			color: white;
 		}
-
-		.container {
-			width: 100%;
-			box-sizing: border-box;
-			overflow: hidden;
-			margin-left: 15%;
-			position: absolute;
-			text-align: left;
-		}
-
 		.createEventHeader {
 			width: 100%;
 			font-size: 28px;
 			color: white;
 		}
 
-		.customFormControl {
-			width: 60%;
-		}
-
 		.InterestButton {
-			margin: 5px;
+			padding: 2px;
+			margin-bottom: 10px;
 		}
 
-		input {
-			margin-bottom: 20px;
+		input, textarea {
+			margin-bottom: 25px;
 			color: black;
+			padding: 2px;
 		}
-
-		textarea {
-			margin-bottom: 20px;
-			color: black;
+		.displayInterests {
+			margin-left: 2%;
 		}
-
-		.customDrop {}
 	</style>
 	<!-- Start of database connection and editing -->
 	<?php include 'CreateEvent_ServerPHP.php'; ?>
-	<section class="CreateEvent_Header">
 		<?php include 'LeftFloatingNavBar.html'; ?>
 		<div class="container">
 			<h3 class="createEventHeader" id="PageHeader">Create An Event</h3>
 			<form id="CreateEventForm" action="CreateEvent_ServerPHP.php" method="post">
 				<input type="hidden" id="str" name="str" value="" />
 				<input type="hidden" id="editEventIndex" name="editEventIndex" value="" />
-				<p class="InputIdentifier">*Title:</p><br /> <input type="text" name="newEventTitle" id="EventTitle" maxlength="50" required /><br />
-				<p class="InputIdentifier">*Date:</p><br /> <input type="date" id="datefield" name="newEventDate" min='1899-01-01' required /><br />
-				<p class="InputIdentifier">*Time:</p><br /> <input type="time" name="newEventTime" id="EventTime" required /><br />
-				<p class="InputIdentifier">*Location:</p><br /> <input type="text" name="newEventLocation" id="EventLocation" maxlength="50" required /><br />
-				<p class="InputIdentifier">*Description:</p><br /> <textarea name="newEventDescription" id="EventDescription" maxlength="100" required></textarea><br />
-				<p class="InputIdentifier">Interest Tags:</p><br />
-				<div class="dropdown customDrop">
-					<input type="text" name="newEventTag" class="form-control form-control-lg customFormControl" placeholder="Type Here..." id="newEventTag" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeyup="javascript:load_data(this.value)">
+				<label class="InputIdentifier">*Title:<br /> <input type="text" name="newEventTitle" id="EventTitle" maxlength="50" size=50 required /></label><br />
+				<label class="InputIdentifier">*Date:<br /> <input type="date" id="datefield" name="newEventDate" min='1899-01-01' required /></label><br />
+				<label class="InputIdentifier">*Time:<br /> <input type="time" name="newEventTime" id="EventTime" required /></label><br />
+				<label class="InputIdentifier">*Location:<br /> <input type="text" name="newEventLocation" id="EventLocation" maxlength="50" size=50 required /></label><br />
+				<label class="InputIdentifier">*Description:<br /> <textarea name="newEventDescription" id="EventDescription" maxlength="100" rows="2" cols="50" required></textarea></label><br />
+				<label class="InputIdentifier">Interest Tags:<br />
+				<div class="dropdown">
+					<input type="text" name="newEventTag" class="form-control form-control-lg customFormControl" placeholder="Type Here..." id="newEventTag" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onkeyup="javascript:load_data(this.value)" size=50>
 					<span id="search_result"></span>
-				</div>
-				<button type="button" class="InterestButton" onclick="AddInterest()">Add Tag</button>
+				</div></label><br />
+				<button type="button" class="InterestButton" onclick="AddInterest()">Add Tag</button><br />
 				<div class="displayInterests">
 					<p class="InputIdentifier" id="InterestList"></p>
-				</div>
-				<input type="submit" name="Submit" id="btn" value="Create Event" class="submitButton" style="color: black;">
+				</div><br />
+				<input type="submit" name="Submit" id="btn" value="Create Event" class="submitButton" style="color: black;"><br />
 				<p class="InputIdentifier">* Denotes a required field.</p>
 			</form>
 		</div>
-	</section>
 </body>
 
 </html>
