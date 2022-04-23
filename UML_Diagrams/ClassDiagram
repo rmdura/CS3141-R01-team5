@@ -1,29 +1,40 @@
 @startuml
 
-class Account {
-  + Email
+class Student {
   + Username
+  + Email
   + Password
   + Birthdate
   + Interests
-  + Schedule
 }
 
 class Event {
-  + Title
+  + Name
   + Date
   + Time
   + Location
   + Description
-  + Tags
+  + Event Interests
+  + Event ID
 }
 
-class Location {
-  + Address Number
-  + Street
-  + City
-  + State
-  + ZIP
+class Interests {
+  + Interest Tag
+}
+
+class "Student Event" {
+  + Student
+  + Event ID
+}
+
+class "Student Interests" {
+  + Student
+  + Interests
+}
+
+class "Event Interests" {
+  + Interests
+  + Event ID
 }
 
 class Date {
@@ -37,9 +48,13 @@ class Time {
   + Hour
 }
 
-Event o-- Location
 Event o-- Date
 Event o-- Time
-Account o-- Date
+"Student Event" o-- Student
+"Student Interests" o-- Student
+Event o-- "Event Interests"
+"Event Interests" o-- Interests
+"Student Interests" o-- Interests
+Interests o-- Student
 
 @enduml
